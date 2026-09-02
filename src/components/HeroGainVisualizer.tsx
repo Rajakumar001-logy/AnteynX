@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, Play, Pause, ChevronRight, ChevronLeft, Maximize2, X } from 'lucide-react';
+import { Activity, ChevronRight, ChevronLeft, Maximize2, X } from 'lucide-react';
 
 interface GainPlot {
   id: string;
@@ -8,8 +8,6 @@ interface GainPlot {
   minGain: string;
   imageSrc: string;
   solver: string;
-  application: string;
-  description: string;
 }
 
 const GAIN_PLOTS: GainPlot[] = [
@@ -19,9 +17,7 @@ const GAIN_PLOTS: GainPlot[] = [
     maxGain: '20.59 dBi',
     minGain: '-51.77 dBi',
     imageSrc: '/assets/ansys-gain-plot-20.59dB.png',
-    solver: 'Ansys HFSS FEA Engine',
-    application: '5G mmWave & Long-Range Telemetry Array',
-    description: '3D gain plot cropped to broadside radiation lobe. Displays sharp main beam directivity and sidelobe nulls.'
+    solver: 'Ansys HFSS FEA Engine'
   },
   {
     id: 'plot-2',
@@ -29,9 +25,7 @@ const GAIN_PLOTS: GainPlot[] = [
     maxGain: '18.67 dBi',
     minGain: '-43.29 dBi',
     imageSrc: '/assets/ansys-gain-plot-18.67dB.png',
-    solver: 'Ansys HFSS MoM Solver',
-    application: 'Aerospace & Radar Sensing Subarray',
-    description: 'Directivity plot of high-gain directional beam with optimized front-to-back ratio.'
+    solver: 'Ansys HFSS MoM Solver'
   },
   {
     id: 'plot-3',
@@ -39,30 +33,18 @@ const GAIN_PLOTS: GainPlot[] = [
     maxGain: '11.18 dBi',
     minGain: '-27.57 dBi',
     imageSrc: '/assets/ansys-gain-plot-11.18dB.png',
-    solver: 'Ansys HFSS Full-Wave Solver',
-    application: 'UAV & Space-Constrained Payload Antenna',
-    description: 'Broadside 3D gain lobe plot synthesized for compact printed microstrip patch antenna architectures.'
+    solver: 'Ansys HFSS Full-Wave Solver'
   }
 ];
 
 export const HeroGainVisualizer: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [isAutoplay, setIsAutoplay] = useState<boolean>(true);
   const [inspectModalOpen, setInspectModalOpen] = useState<boolean>(false);
   const [scanPosition, setScanPosition] = useState<number>(0);
 
   const activePlot = GAIN_PLOTS[currentIndex];
 
-  // Auto-slide effect for gain animation
-  useEffect(() => {
-    if (!isAutoplay) return;
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % GAIN_PLOTS.length);
-    }, 4500);
-    return () => clearInterval(interval);
-  }, [isAutoplay]);
-
-  // Laser scanner animation effect
+  // Continuous laser scanner animation effect
   useEffect(() => {
     const scanInterval = setInterval(() => {
       setScanPosition((prev) => (prev + 1) % 100);
@@ -87,36 +69,16 @@ export const HeroGainVisualizer: React.FC = () => {
             <Activity className="w-4 h-4 text-blue-600 animate-pulse" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-xs font-mono font-bold text-slate-900 uppercase tracking-wider">
-                Ansys HFSS 3D Gain Plot Visualizer
-              </h3>
-              <span className="px-2 py-0.5 bg-blue-50 text-blue-700 text-[10px] font-mono font-bold rounded border border-blue-200">
-                HFSS 2024 R1
-              </span>
-            </div>
-            <p className="text-[11px] text-slate-500 font-mono">
-              3D Far-Field Directivity Radiation Lobe
-            </p>
+            <h3 className="text-xs font-mono font-bold text-slate-900 uppercase tracking-wider">
+              Ansys HFSS 3D Gain Plot Visualizer
+            </h3>
           </div>
         </div>
 
         <div className="flex items-center gap-2 font-mono text-xs">
           <button
-            onClick={() => setIsAutoplay(!isAutoplay)}
-            className={`flex items-center gap-1 px-2.5 py-1 rounded transition border font-bold text-[11px] ${
-              isAutoplay
-                ? 'bg-blue-50 text-blue-700 border-blue-300'
-                : 'bg-slate-100 text-slate-600 border-slate-200'
-            }`}
-          >
-            {isAutoplay ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
-            <span>{isAutoplay ? 'Auto' : 'Paused'}</span>
-          </button>
-
-          <button
             onClick={() => setInspectModalOpen(true)}
-            className="p-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded border border-slate-200"
+            className="p-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded border border-slate-200 transition"
             title="Inspect Full-Screen"
           >
             <Maximize2 className="w-3.5 h-3.5" />
@@ -173,10 +135,7 @@ export const HeroGainVisualizer: React.FC = () => {
         {GAIN_PLOTS.map((plot, idx) => (
           <button
             key={plot.id}
-            onClick={() => {
-              setCurrentIndex(idx);
-              setIsAutoplay(false);
-            }}
+            onClick={() => setCurrentIndex(idx)}
             className={`p-2 rounded-lg border text-left transition ${
               currentIndex === idx
                 ? 'bg-blue-50 border-blue-500 text-blue-700 font-bold shadow-sm'
@@ -189,15 +148,9 @@ export const HeroGainVisualizer: React.FC = () => {
         ))}
       </div>
 
-      {/* Plot Description Box */}
-      <div className="mt-3 p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1 text-xs font-sans">
-        <div className="flex items-center justify-between font-mono">
-          <span className="font-bold text-slate-900 text-xs">{activePlot.title}</span>
-          <span className="text-[10px] text-blue-600 font-bold">{activePlot.application}</span>
-        </div>
-        <p className="text-slate-600 text-xs leading-relaxed">
-          {activePlot.description}
-        </p>
+      {/* Plot Title Box */}
+      <div className="mt-3 p-3 bg-slate-50 border border-slate-200 rounded-xl font-sans">
+        <span className="font-bold text-slate-900 text-xs font-mono">{activePlot.title}</span>
       </div>
 
       {/* Full-Screen Inspection Modal */}
