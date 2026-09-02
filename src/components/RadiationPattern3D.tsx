@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Compass, RotateCw, Eye } from 'lucide-react';
 
 interface RadiationPatternProps {
   peakGain?: string;
@@ -14,7 +13,7 @@ export const RadiationPattern3D: React.FC<RadiationPatternProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [viewMode, setViewMode] = useState<'3d' | 'e-plane' | 'h-plane'>('3d');
-  const [rotationAngle, setRotationAngle] = useState(45);
+  const [rotationAngle] = useState(45);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -34,7 +33,7 @@ export const RadiationPattern3D: React.FC<RadiationPatternProps> = ({
     resize();
 
     const drawPolarGrid = (cx: number, cy: number, maxRadius: number) => {
-      ctx.strokeStyle = 'rgba(30, 45, 74, 0.6)';
+      ctx.strokeStyle = '#E2E8F0';
       ctx.lineWidth = 1;
 
       // Concentric gain circles (dB levels)
@@ -59,7 +58,7 @@ export const RadiationPattern3D: React.FC<RadiationPatternProps> = ({
         ctx.stroke();
 
         if (a % 90 === 0) {
-          ctx.fillStyle = '#00F0FF';
+          ctx.fillStyle = '#2563EB';
           ctx.font = 'bold 10px JetBrains Mono';
           const labelR = maxRadius + 14;
           ctx.fillText(`${a}°`, cx + labelR * Math.cos(rad) - 8, cy + labelR * Math.sin(rad) + 3);
@@ -80,16 +79,15 @@ export const RadiationPattern3D: React.FC<RadiationPatternProps> = ({
         drawPolarGrid(cx, cy, maxRadius);
 
         ctx.beginPath();
-        ctx.strokeStyle = viewMode === 'e-plane' ? '#00F0FF' : '#EAB308';
+        ctx.strokeStyle = viewMode === 'e-plane' ? '#2563EB' : '#D97706';
         ctx.lineWidth = 2.5;
-        ctx.fillStyle = viewMode === 'e-plane' ? 'rgba(0, 240, 255, 0.15)' : 'rgba(234, 179, 8, 0.15)';
+        ctx.fillStyle = viewMode === 'e-plane' ? 'rgba(37, 99, 235, 0.15)' : 'rgba(217, 119, 6, 0.15)';
 
         for (let theta = 0; theta <= 360; theta += 2) {
           const rad = (theta * Math.PI) / 180;
-          // Cardioid broadside radiation pattern mathematical model: r(theta) = cos^2(theta / 2) with backlobe
           let g = Math.pow(Math.cos(rad * 0.5), 2.2);
           if (viewMode === 'h-plane') {
-            g = Math.pow(Math.cos(rad * 0.5), 1.6); // slightly broader H-plane
+            g = Math.pow(Math.cos(rad * 0.5), 1.6);
           }
           const r = maxRadius * Math.max(0.08, g);
 
@@ -104,7 +102,7 @@ export const RadiationPattern3D: React.FC<RadiationPatternProps> = ({
         ctx.stroke();
 
         // Label
-        ctx.fillStyle = viewMode === 'e-plane' ? '#00F0FF' : '#EAB308';
+        ctx.fillStyle = viewMode === 'e-plane' ? '#2563EB' : '#D97706';
         ctx.font = 'bold 11px JetBrains Mono';
         ctx.fillText(viewMode === 'e-plane' ? 'E-Plane Cut (XZ φ=0°)' : 'H-Plane Cut (YZ φ=90°)', 20, 25);
       } else {
@@ -112,21 +110,20 @@ export const RadiationPattern3D: React.FC<RadiationPatternProps> = ({
         angle += 0.4;
         const radA = (angle * Math.PI) / 180;
 
-        // Draw 3D coordinate axes
-        ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
+        ctx.strokeStyle = '#CBD5E1';
         ctx.lineWidth = 1;
         ctx.setLineDash([3, 3]);
 
-        // Z-axis (broadside direction)
+        // Z-axis
         ctx.beginPath();
         ctx.moveTo(cx, cy);
         ctx.lineTo(cx, cy - 140);
         ctx.stroke();
-        ctx.fillStyle = '#00F0FF';
-        ctx.font = '10px JetBrains Mono';
+        ctx.fillStyle = '#2563EB';
+        ctx.font = 'bold 10px JetBrains Mono';
         ctx.fillText('+Z (Broadside)', cx + 5, cy - 130);
 
-        // X and Y axes transformed
+        // X and Y axes
         const xDir = Math.cos(radA) * 110;
         const yDir = Math.sin(radA) * 60;
         ctx.beginPath();
@@ -136,28 +133,24 @@ export const RadiationPattern3D: React.FC<RadiationPatternProps> = ({
 
         ctx.setLineDash([]);
 
-        // Render 3D 3D Mesh Lobe using wireframe parametric surface
+        // Render 3D Mesh Lobe
         const uSteps = 24;
         const vSteps = 16;
 
         for (let i = 0; i < uSteps; i++) {
           const phi = (i / uSteps) * Math.PI * 2;
           ctx.beginPath();
-          ctx.strokeStyle = `hsla(${200 + i * 5}, 100%, 60%, 0.6)`;
+          ctx.strokeStyle = `hsla(${210 + i * 4}, 90%, 50%, 0.7)`;
           ctx.lineWidth = 1.2;
 
           for (let j = 0; j <= vSteps; j++) {
             const theta = (j / vSteps) * Math.PI;
-
-            // Gain formula: g(theta, phi) broadside directional lobe
             const rVal = Math.pow(Math.abs(Math.cos(theta * 0.5)), 2) * 100;
 
-            // 3D spherical conversion
             const x3d = rVal * Math.sin(theta) * Math.cos(phi);
             const y3d = rVal * Math.sin(theta) * Math.sin(phi);
             const z3d = rVal * Math.cos(theta);
 
-            // Project to 2D screen
             const projX = cx + x3d * Math.cos(radA) - y3d * Math.sin(radA);
             const projY = cy + x3d * Math.sin(radA) * 0.4 + y3d * Math.cos(radA) * 0.4 - z3d * 0.8;
 
@@ -167,30 +160,30 @@ export const RadiationPattern3D: React.FC<RadiationPatternProps> = ({
           ctx.stroke();
         }
 
-        // Draw Antenna Ground Plate Base
-        ctx.fillStyle = 'rgba(30, 45, 74, 0.8)';
-        ctx.strokeStyle = '#00F0FF';
+        // Antenna Ground Plate Base
+        ctx.fillStyle = '#E2E8F0';
+        ctx.strokeStyle = '#2563EB';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.ellipse(cx, cy + 15, 60, 25, 0, 0, Math.PI * 2);
         ctx.fill();
         ctx.stroke();
 
-        ctx.fillStyle = '#F8FAFC';
+        ctx.fillStyle = '#0F172A';
         ctx.font = 'bold 11px JetBrains Mono';
         ctx.fillText(`3D Far-Field Directivity (Gain Lobe)`, 20, 25);
       }
 
       // Legend box
-      ctx.fillStyle = 'rgba(7, 11, 20, 0.75)';
+      ctx.fillStyle = '#FFFFFF';
       ctx.fillRect(width - 150, 15, 135, 65);
-      ctx.strokeStyle = 'rgba(30, 45, 74, 0.8)';
+      ctx.strokeStyle = '#CBD5E1';
       ctx.strokeRect(width - 150, 15, 135, 65);
 
-      ctx.fillStyle = '#00F0FF';
+      ctx.fillStyle = '#2563EB';
       ctx.font = 'bold 10px JetBrains Mono';
       ctx.fillText(`Peak: ${peakGain}`, width - 140, 32);
-      ctx.fillStyle = '#94A3B8';
+      ctx.fillStyle = '#475569';
       ctx.fillText(`HPBW: ${beamwidth}`, width - 140, 47);
       ctx.fillText(`Type: ${antennaType}`, width - 140, 62);
 
@@ -205,31 +198,31 @@ export const RadiationPattern3D: React.FC<RadiationPatternProps> = ({
   }, [viewMode, peakGain, beamwidth, antennaType, rotationAngle]);
 
   return (
-    <div className="relative w-full h-[340px] bg-rf-navy/90 rounded-xl border border-rf-border/80 overflow-hidden shadow-xl">
+    <div className="relative w-full h-[340px] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
       <canvas ref={canvasRef} className="w-full h-full block" />
 
       {/* Mode Controls */}
-      <div className="absolute bottom-3 left-3 flex items-center gap-1.5 p-1 bg-rf-dark/90 rounded-lg border border-rf-border text-xs font-mono">
+      <div className="absolute bottom-3 left-3 flex items-center gap-1.5 p-1 bg-white rounded-lg border border-slate-200 text-xs font-mono shadow-sm">
         <button
           onClick={() => setViewMode('3d')}
-          className={`px-2.5 py-1 rounded transition ${
-            viewMode === '3d' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40' : 'text-slate-400 hover:text-white'
+          className={`px-2.5 py-1 rounded transition font-bold ${
+            viewMode === '3d' ? 'bg-blue-50 text-blue-600 border border-blue-200' : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           3D Farfield Lobe
         </button>
         <button
           onClick={() => setViewMode('e-plane')}
-          className={`px-2.5 py-1 rounded transition ${
-            viewMode === 'e-plane' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40' : 'text-slate-400 hover:text-white'
+          className={`px-2.5 py-1 rounded transition font-bold ${
+            viewMode === 'e-plane' ? 'bg-blue-50 text-blue-600 border border-blue-200' : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           E-Cut (XZ)
         </button>
         <button
           onClick={() => setViewMode('h-plane')}
-          className={`px-2.5 py-1 rounded transition ${
-            viewMode === 'h-plane' ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/40' : 'text-slate-400 hover:text-white'
+          className={`px-2.5 py-1 rounded transition font-bold ${
+            viewMode === 'h-plane' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           H-Cut (YZ)

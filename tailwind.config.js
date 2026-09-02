@@ -8,14 +8,15 @@ export default {
     extend: {
       colors: {
         rf: {
-          dark: "#070B14",
-          navy: "#0E1628",
-          card: "#131C31",
-          border: "#1E2D4A",
-          cyan: "#00F0FF",
-          blue: "#2563EB",
-          lightCyan: "#7DF9FF",
-          slate: "#94A3B8"
+          dark: "#FFFFFF",      // Main background: pure crisp white
+          navy: "#F8FAFC",      // Card/section background: slate-50 off-white
+          card: "#FFFFFF",      // Card surface
+          border: "#E2E8F0",    // Light slate border
+          borderDark: "#CBD5E1", // Slightly darker border for focus
+          cyan: "#0284C7",      // Crisp electric blue accent (cyan-600)
+          blue: "#2563EB",      // Primary cobalt blue (blue-600)
+          lightCyan: "#E0F2FE", // Soft blue badge background
+          slate: "#475569"       // Slate body text
         }
       },
       fontFamily: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Activity, Play, Pause, RefreshCw, Cpu, Layers } from 'lucide-react';
+import { Play, Pause } from 'lucide-react';
 
 interface EMWaveVisualizerProps {
   interactive?: boolean;
@@ -11,7 +11,6 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
   const [frequency, setFrequency] = useState(5.8); // GHz
   const [showFieldVectors, setShowFieldVectors] = useState(true);
   const [showWaves, setShowWaves] = useState(true);
-  const [activeTab, setActiveTab] = useState<'3d' | 'plane'>('3d');
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -39,8 +38,8 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
       const centerX = width / 2;
       const centerY = height / 2 + 20;
 
-      // Draw Grid Background
-      ctx.strokeStyle = 'rgba(30, 45, 74, 0.4)';
+      // Draw Light Grid Background
+      ctx.strokeStyle = '#E2E8F0';
       ctx.lineWidth = 1;
       const gridSize = 30;
       for (let x = 0; x < width; x += gridSize) {
@@ -56,16 +55,14 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
         ctx.stroke();
       }
 
-      // Draw Substrate / Microstrip Antenna CAD Representation in center
+      // Draw Substrate / Microstrip Antenna CAD Representation
       const patchW = 140;
       const patchH = 100;
-      
-      // Isometric transformation angles
       const isoAngle = Math.PI / 6;
 
-      // Antenna Ground Plane
-      ctx.fillStyle = 'rgba(14, 22, 40, 0.9)';
-      ctx.strokeStyle = 'rgba(0, 240, 255, 0.6)';
+      // Ground Plane (Light slate container)
+      ctx.fillStyle = '#F1F5F9';
+      ctx.strokeStyle = '#2563EB';
       ctx.lineWidth = 1.5;
 
       ctx.beginPath();
@@ -77,8 +74,9 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
       ctx.fill();
       ctx.stroke();
 
-      // Substrate dielectric layer (greenish accent)
+      // Substrate dielectric layer (light emerald accent)
       ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
+      ctx.strokeStyle = '#059669';
       ctx.beginPath();
       ctx.moveTo(centerX - patchW, centerY + patchH / 2 - 12);
       ctx.lineTo(centerX, centerY + patchH / 2 + patchW * Math.sin(isoAngle) - 12);
@@ -93,8 +91,8 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
       const patchHeight3d = 60;
       const patchYOffset = -24;
 
-      ctx.fillStyle = 'rgba(234, 179, 8, 0.25)';
-      ctx.strokeStyle = '#EAB308';
+      ctx.fillStyle = 'rgba(217, 119, 6, 0.25)';
+      ctx.strokeStyle = '#D97706';
       ctx.lineWidth = 2;
 
       ctx.beginPath();
@@ -107,7 +105,7 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
       ctx.stroke();
 
       // Feed Line
-      ctx.strokeStyle = '#00F0FF';
+      ctx.strokeStyle = '#2563EB';
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.moveTo(centerX, centerY + patchH / 2 + patchW * Math.sin(isoAngle) - 12);
@@ -126,7 +124,7 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
           ctx.save();
           ctx.beginPath();
           ctx.ellipse(centerX, centerY + patchYOffset - 30, r, r * 0.55, 0, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(0, 240, 255, ${alpha * 0.7})`;
+          ctx.strokeStyle = `rgba(37, 99, 235, ${alpha * 0.8})`;
           ctx.lineWidth = 2;
           ctx.setLineDash([6, 4]);
           ctx.stroke();
@@ -134,7 +132,7 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
           // Magnetic Field H-loops (orthogonal in gold)
           ctx.beginPath();
           ctx.ellipse(centerX, centerY + patchYOffset - 30, r * 0.55, r, Math.PI / 2, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(59, 130, 246, ${alpha * 0.5})`;
+          ctx.strokeStyle = `rgba(217, 119, 6, ${alpha * 0.6})`;
           ctx.stroke();
           ctx.restore();
         }
@@ -146,7 +144,7 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
         const waveK = 0.05 * (frequency / 2.5);
         
         // Z-axis (Poynting Vector S)
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.strokeStyle = '#64748B';
         ctx.lineWidth = 1.5;
         ctx.setLineDash([4, 4]);
         ctx.beginPath();
@@ -156,13 +154,13 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
         ctx.setLineDash([]);
 
         // Poynting Vector Arrow Header
-        ctx.fillStyle = '#00F0FF';
-        ctx.font = '11px JetBrains Mono';
+        ctx.fillStyle = '#2563EB';
+        ctx.font = 'bold 11px JetBrains Mono';
         ctx.fillText(`Poynting Vector S (E × H)`, centerX + 10, centerY + patchYOffset - axisLength + 5);
 
-        // Sinusoidal E-field (Cyan, vertical oscillation) and H-field (Gold, horizontal)
+        // Sinusoidal E-field (Cobalt Blue, vertical oscillation)
         ctx.beginPath();
-        ctx.strokeStyle = '#00F0FF';
+        ctx.strokeStyle = '#2563EB';
         ctx.lineWidth = 2.5;
 
         for (let z = 0; z <= axisLength; z += 3) {
@@ -176,7 +174,7 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
           // Vector arrows every 20px
           if (z % 20 === 0 && z > 0) {
             ctx.save();
-            ctx.strokeStyle = 'rgba(0, 240, 255, 0.6)';
+            ctx.strokeStyle = 'rgba(37, 99, 235, 0.7)';
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(centerX, yPos);
@@ -185,7 +183,7 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
 
             // Draw H-field vector (orthogonal 3D depth line)
             const hAmp = Math.sin(z * waveK - time * 0.1 * frequency) * 25;
-            ctx.strokeStyle = 'rgba(234, 179, 8, 0.7)';
+            ctx.strokeStyle = 'rgba(217, 119, 6, 0.8)';
             ctx.beginPath();
             ctx.moveTo(centerX, yPos);
             ctx.lineTo(centerX - hAmp * 0.7, yPos + hAmp * 0.4);
@@ -196,18 +194,18 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
         ctx.stroke();
       }
 
-      // Live Technical Annotations Box
-      ctx.fillStyle = 'rgba(14, 22, 40, 0.85)';
-      ctx.strokeStyle = 'rgba(30, 45, 74, 0.9)';
+      // Live Technical Annotations Box (Light crisp theme)
+      ctx.fillStyle = '#FFFFFF';
+      ctx.strokeStyle = '#CBD5E1';
       ctx.lineWidth = 1;
-      ctx.fillRect(15, 15, 220, 90);
-      ctx.strokeRect(15, 15, 220, 90);
+      ctx.fillRect(15, 15, 220, 95);
+      ctx.strokeRect(15, 15, 220, 95);
 
-      ctx.fillStyle = '#00F0FF';
+      ctx.fillStyle = '#2563EB';
       ctx.font = 'bold 11px JetBrains Mono';
       ctx.fillText('EM SIMULATION MONITOR', 25, 32);
 
-      ctx.fillStyle = '#94A3B8';
+      ctx.fillStyle = '#475569';
       ctx.font = '10px JetBrains Mono';
       ctx.fillText(`Freq (f0): ${frequency.toFixed(2)} GHz`, 25, 50);
       ctx.fillText(`Wavelength (λ0): ${(300 / (frequency * 1000) * 100).toFixed(2)} mm`, 25, 65);
@@ -229,24 +227,24 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
   }, [isPlaying, frequency, showFieldVectors, showWaves]);
 
   return (
-    <div className="relative w-full h-[450px] bg-rf-navy/90 rounded-xl border border-rf-border/80 overflow-hidden shadow-2xl">
+    <div className="relative w-full h-[450px] bg-white rounded-xl border border-slate-200 overflow-hidden shadow-lg">
       {/* Visualizer Canvas */}
       <canvas ref={canvasRef} className="w-full h-full block" />
 
       {/* Interactive Controls Overlay */}
       {interactive && (
-        <div className="absolute bottom-3 left-3 right-3 flex flex-wrap items-center justify-between gap-2 p-2.5 bg-rf-dark/90 backdrop-blur-md rounded-lg border border-rf-border/80 text-xs font-mono text-slate-300">
+        <div className="absolute bottom-3 left-3 right-3 flex flex-wrap items-center justify-between gap-2 p-2.5 bg-white/95 backdrop-blur-md rounded-lg border border-slate-200 text-xs font-mono text-slate-700 shadow-sm">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsPlaying(!isPlaying)}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-rf-border/60 hover:bg-cyan-500/20 text-cyan-400 rounded transition border border-cyan-500/30"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded transition border border-blue-200 font-bold"
             >
               {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
               {isPlaying ? 'Pause' : 'Animate'}
             </button>
 
-            <div className="flex items-center gap-2 border-l border-rf-border pl-3">
-              <span className="text-slate-400">Freq:</span>
+            <div className="flex items-center gap-2 border-l border-slate-200 pl-3">
+              <span className="text-slate-500">Freq:</span>
               <input
                 type="range"
                 min="0.9"
@@ -254,17 +252,17 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
                 step="0.1"
                 value={frequency}
                 onChange={(e) => setFrequency(parseFloat(e.target.value))}
-                className="w-24 accent-cyan-400 h-1.5 bg-rf-border rounded-lg cursor-pointer"
+                className="w-24 accent-blue-600 h-1.5 bg-slate-200 rounded-lg cursor-pointer"
               />
-              <span className="text-cyan-400 w-16 font-bold">{frequency.toFixed(1)} GHz</span>
+              <span className="text-blue-600 font-bold w-16">{frequency.toFixed(1)} GHz</span>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowFieldVectors(!showFieldVectors)}
-              className={`px-2.5 py-1 rounded transition border ${
-                showFieldVectors ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300' : 'bg-rf-border/40 border-transparent text-slate-400'
+              className={`px-2.5 py-1 rounded transition border font-bold ${
+                showFieldVectors ? 'bg-blue-50 border-blue-300 text-blue-700' : 'bg-slate-50 border-slate-200 text-slate-500'
               }`}
             >
               E/H Vectors
@@ -272,8 +270,8 @@ export const EMWaveVisualizer: React.FC<EMWaveVisualizerProps> = ({ interactive 
 
             <button
               onClick={() => setShowWaves(!showWaves)}
-              className={`px-2.5 py-1 rounded transition border ${
-                showWaves ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300' : 'bg-rf-border/40 border-transparent text-slate-400'
+              className={`px-2.5 py-1 rounded transition border font-bold ${
+                showWaves ? 'bg-blue-50 border-blue-300 text-blue-700' : 'bg-slate-50 border-slate-200 text-slate-500'
               }`}
             >
               Wavefronts

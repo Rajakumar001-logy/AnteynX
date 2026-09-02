@@ -1,5 +1,5 @@
 import React from 'react';
-import { Radio, Cpu, Sliders, Layers, Zap, FileText, CheckCircle2, ArrowRight, ShieldCheck, Download, Box, Activity } from 'lucide-react';
+import { Radio, Cpu, Sliders, Layers, Zap, FileText, CheckCircle2, ArrowRight, ShieldCheck, Box } from 'lucide-react';
 
 interface ServicesPageProps {
   setCurrentPage: (page: string) => void;
@@ -96,18 +96,18 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ setCurrentPage }) =>
   ];
 
   return (
-    <div className="min-h-screen bg-rf-dark text-slate-100 font-sans pt-28 pb-20">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans pt-28 pb-20">
       {/* HEADER */}
-      <section className="relative py-12 bg-radial-gradient border-b border-rf-border">
+      <section className="relative py-12 bg-radial-gradient border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 rounded-full font-mono text-xs font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 border border-blue-200 text-blue-700 rounded-full font-mono text-xs font-semibold">
             <Radio className="w-3.5 h-3.5" />
             ELECTROMAGNETIC DESIGN SERVICES
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
             Our Antenna Design Services
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             Full-wave electromagnetic simulation, architectural design, and optimization tailored specifically to your operating frequency, form factor, and application requirements.
           </p>
         </div>
@@ -121,27 +121,27 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ setCurrentPage }) =>
             <div
               key={service.id}
               id={service.id}
-              className="bg-rf-navy/80 border border-rf-border rounded-2xl p-6 sm:p-8 hover:border-cyan-500/40 transition duration-300 shadow-xl relative overflow-hidden"
+              className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 hover:border-blue-400 transition duration-300 shadow-sm hover:shadow-md relative overflow-hidden"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 <div className="lg:col-span-7 space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-cyan-400">
+                    <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl text-blue-600">
                       <IconComp className="w-6 h-6" />
                     </div>
                     <div>
-                      <span className="font-mono text-xs text-cyan-400 font-bold block">SERVICE 0{idx + 1}</span>
-                      <h2 className="text-2xl font-bold text-white">{service.title}</h2>
+                      <span className="font-mono text-xs text-blue-600 font-bold block">SERVICE 0{idx + 1}</span>
+                      <h2 className="text-2xl font-bold text-slate-900">{service.title}</h2>
                     </div>
                   </div>
 
-                  <p className="text-cyan-300 font-mono text-xs font-semibold">{service.tagline}</p>
-                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">{service.desc}</p>
+                  <p className="text-blue-700 font-mono text-xs font-semibold">{service.tagline}</p>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{service.desc}</p>
 
                   <div className="pt-2">
                     <button
                       onClick={() => setCurrentPage('quote')}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 font-mono text-xs rounded-lg transition"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-mono text-xs font-bold rounded-lg transition"
                     >
                       <span>Request This Service</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -149,15 +149,15 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ setCurrentPage }) =>
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 bg-rf-dark/90 rounded-xl border border-rf-border p-5 space-y-3 font-mono">
-                  <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider border-b border-rf-border pb-2 flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                <div className="lg:col-span-5 bg-slate-50 rounded-xl border border-slate-200 p-5 space-y-3 font-mono">
+                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-200 pb-2 flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-blue-600" />
                     Key Deliverables & Focus Areas
                   </h4>
-                  <ul className="space-y-2 text-xs text-slate-400">
+                  <ul className="space-y-2 text-xs text-slate-600">
                     {service.capabilities.map((cap, cIdx) => (
                       <li key={cIdx} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
                         <span>{cap}</span>
                       </li>
                     ))}
@@ -170,22 +170,22 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ setCurrentPage }) =>
       </section>
 
       {/* DELIVERABLES CHECKLIST */}
-      <section className="py-16 bg-rf-navy/60 border-y border-rf-border">
+      <section className="py-16 bg-white border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center max-w-xl mx-auto space-y-2">
-            <span className="text-xs font-mono text-cyan-400 font-bold tracking-wider uppercase">DESIGN PACKAGE</span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">What You Receive in Your Design Package</h2>
-            <p className="text-slate-400 text-xs sm:text-sm">Every completed design project includes full engineering IP artifacts.</p>
+            <span className="text-xs font-mono text-blue-600 font-bold tracking-wider uppercase">DESIGN PACKAGE</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">What You Receive in Your Design Package</h2>
+            <p className="text-slate-600 text-xs sm:text-sm">Every completed design project includes full engineering IP artifacts.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-mono">
             {deliverables.map((del, idx) => (
-              <div key={idx} className="bg-rf-dark/90 border border-rf-border p-5 rounded-xl space-y-2">
-                <div className="flex items-center gap-2 text-cyan-400 font-bold text-xs">
+              <div key={idx} className="bg-slate-50 border border-slate-200 p-5 rounded-xl space-y-2">
+                <div className="flex items-center gap-2 text-blue-600 font-bold text-xs">
                   <Box className="w-4 h-4" />
                   <span>{del.title}</span>
                 </div>
-                <p className="text-slate-400 text-xs leading-relaxed font-sans">{del.desc}</p>
+                <p className="text-slate-600 text-xs leading-relaxed font-sans">{del.desc}</p>
               </div>
             ))}
           </div>
@@ -195,13 +195,13 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ setCurrentPage }) =>
       {/* CTA STRIP */}
       <section className="py-16 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Need a Custom Antenna Designed?</h2>
-          <p className="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto font-mono">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">Need a Custom Antenna Designed?</h2>
+          <p className="text-slate-600 text-xs sm:text-sm max-w-lg mx-auto font-mono">
             Submit your frequency, space constraints, substrate material, and target gain. Our team will review your specifications.
           </p>
           <button
             onClick={() => setCurrentPage('quote')}
-            className="px-8 py-3.5 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-mono font-bold text-xs rounded-xl shadow-xl shadow-cyan-500/20 transition inline-flex items-center gap-2"
+            className="px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-mono font-bold text-xs rounded-xl shadow-lg shadow-blue-500/20 transition inline-flex items-center gap-2"
           >
             <span>Request an Antenna Design</span>
             <ArrowRight className="w-4 h-4" />

@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import {
-  FileText,
   Upload,
   CheckCircle2,
-  AlertCircle,
   Radio,
-  Cpu,
-  Layers,
   ArrowRight,
   ShieldCheck,
   Trash2,
   FileCode,
-  Info,
   Clock
 } from 'lucide-react';
 
@@ -22,16 +17,13 @@ interface FileItem {
 }
 
 export const QuotePage: React.FC = () => {
-  // Form State
   const [formData, setFormData] = useState({
-    // Contact Info
     name: '',
     company: '',
     email: '',
     phone: '',
     country: 'United States',
 
-    // Antenna Requirements
     application: 'UAV & Drones',
     operatingFreq: '5.8 GHz',
     requiredBandwidth: '300 MHz',
@@ -46,7 +38,6 @@ export const QuotePage: React.FC = () => {
     mimoRequirement: 'No',
     powerHandling: '5 Watts',
 
-    // Project Info
     quantity: '1 - 5 units (Design Phase)',
     prototypeRequired: 'Yes',
     simulationReportRequired: 'Yes',
@@ -99,18 +90,18 @@ export const QuotePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-rf-dark text-slate-100 font-sans pt-28 pb-20">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans pt-28 pb-20">
       {/* HEADER */}
-      <section className="relative py-10 bg-radial-gradient border-b border-rf-border">
+      <section className="relative py-10 bg-radial-gradient border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 rounded-full font-mono text-xs font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 border border-blue-200 text-blue-700 rounded-full font-mono text-xs font-semibold">
             <Radio className="w-3.5 h-3.5" />
             RF REQUIREMENT SPECIFICATION
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
             Tell Us What You Need
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             Fill out your technical requirements below. Our engineering team will perform an initial feasibility review and contact you with a simulation design proposal.
           </p>
         </div>
@@ -120,28 +111,28 @@ export const QuotePage: React.FC = () => {
       <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {isSubmitted ? (
           /* SUCCESS STATE */
-          <div className="max-w-2xl mx-auto bg-rf-navy/90 border border-cyan-400 rounded-2xl p-8 sm:p-12 text-center space-y-6 shadow-2xl font-mono">
-            <div className="w-20 h-20 bg-cyan-500/20 text-cyan-400 rounded-full flex items-center justify-center mx-auto border-2 border-cyan-400 shadow-lg">
+          <div className="max-w-2xl mx-auto bg-white border border-blue-400 rounded-2xl p-8 sm:p-12 text-center space-y-6 shadow-xl font-mono">
+            <div className="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto border-2 border-blue-600 shadow-md">
               <CheckCircle2 className="w-10 h-10" />
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white font-sans">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-sans">
               RF Requirement Submitted
             </h2>
 
-            <p className="text-cyan-300 font-bold text-sm font-sans">
+            <p className="text-blue-700 font-bold text-sm font-sans">
               "Thank you. Our engineering team will review your requirement and contact you."
             </p>
 
-            <p className="text-slate-300 text-xs sm:text-sm font-sans leading-relaxed">
+            <p className="text-slate-600 text-xs sm:text-sm font-sans leading-relaxed">
               We have received your specifications for operating frequency <strong>{formData.operatingFreq}</strong> ({formData.antennaType}). An RF engineer has been assigned to conduct an initial HFSS feasibility sweep. Expect an email reply within 24-48 business hours.
             </p>
 
-            <div className="p-4 bg-rf-dark rounded-xl border border-rf-border text-left text-xs text-slate-400 space-y-1">
-              <div><strong className="text-slate-200">Contact:</strong> {formData.name} ({formData.email})</div>
-              <div><strong className="text-slate-200">Application:</strong> {formData.application}</div>
-              <div><strong className="text-slate-200">Target Freq:</strong> {formData.operatingFreq}</div>
-              <div><strong className="text-slate-200">Files Uploaded:</strong> {files.length} attachment(s)</div>
+            <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-left text-xs text-slate-600 space-y-1">
+              <div><strong className="text-slate-900">Contact:</strong> {formData.name} ({formData.email})</div>
+              <div><strong className="text-slate-900">Application:</strong> {formData.application}</div>
+              <div><strong className="text-slate-900">Target Freq:</strong> {formData.operatingFreq}</div>
+              <div><strong className="text-slate-900">Files Uploaded:</strong> {files.length} attachment(s)</div>
             </div>
 
             <button
@@ -149,7 +140,7 @@ export const QuotePage: React.FC = () => {
                 setIsSubmitted(false);
                 setStepTab(1);
               }}
-              className="px-6 py-3 bg-cyan-400 text-slate-950 font-bold text-xs rounded-xl shadow hover:bg-cyan-300 transition"
+              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition"
             >
               Submit Another Requirement
             </button>
@@ -157,9 +148,9 @@ export const QuotePage: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left Form (8 Cols) */}
-            <div className="lg:col-span-8 bg-rf-navy/90 border border-rf-border rounded-2xl p-6 sm:p-8 shadow-2xl space-y-8">
+            <div className="lg:col-span-8 bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-8">
               {/* Stepper Tabs */}
-              <div className="flex items-center justify-between border-b border-rf-border pb-4 font-mono text-xs overflow-x-auto gap-2">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-4 font-mono text-xs overflow-x-auto gap-2">
                 {[
                   { num: 1, label: 'Contact Info' },
                   { num: 2, label: 'Antenna Specs' },
@@ -172,11 +163,11 @@ export const QuotePage: React.FC = () => {
                     onClick={() => setStepTab(st.num)}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg transition shrink-0 ${
                       stepTab === st.num
-                        ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400 font-bold'
-                        : 'text-slate-400 hover:text-white'
+                        ? 'bg-blue-50 text-blue-700 border border-blue-300 font-bold'
+                        : 'text-slate-500 hover:text-slate-900'
                     }`}
                   >
-                    <span className="w-5 h-5 rounded-full bg-rf-dark border border-rf-border flex items-center justify-center text-[10px]">
+                    <span className="w-5 h-5 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center text-[10px]">
                       {st.num}
                     </span>
                     <span>{st.label}</span>
@@ -187,67 +178,67 @@ export const QuotePage: React.FC = () => {
               <form onSubmit={handleSubmit} className="space-y-8">
                 {/* SECTION 1: CONTACT INFORMATION */}
                 <div className={`space-y-4 ${stepTab !== 1 ? 'hidden sm:block' : ''}`}>
-                  <h3 className="text-lg font-bold text-white border-b border-rf-border/80 pb-2 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs flex items-center justify-center font-bold">1</span>
+                  <h3 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 flex items-center gap-2">
+                    <span className="w-6 h-6 rounded bg-blue-50 text-blue-600 font-mono text-xs flex items-center justify-center font-bold">1</span>
                     Contact & Organization Details
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
                     <div>
-                      <label className="block text-slate-300 mb-1">Full Name *</label>
+                      <label className="block text-slate-700 mb-1">Full Name *</label>
                       <input
                         type="text"
                         required
                         placeholder="e.g. Dr. Sarah Chen"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Company / Organization *</label>
+                      <label className="block text-slate-700 mb-1">Company / Organization *</label>
                       <input
                         type="text"
                         required
                         placeholder="e.g. Apex Robotics Inc. / MIT Lab"
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Email Address *</label>
+                      <label className="block text-slate-700 mb-1">Email Address *</label>
                       <input
                         type="email"
                         required
                         placeholder="sarah@company.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Phone Number</label>
+                      <label className="block text-slate-700 mb-1">Phone Number</label>
                       <input
                         type="tel"
                         placeholder="+1 (555) 019-2831"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div className="sm:col-span-2">
-                      <label className="block text-slate-300 mb-1">Country</label>
+                      <label className="block text-slate-700 mb-1">Country</label>
                       <input
                         type="text"
                         placeholder="United States"
                         value={formData.country}
                         onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
                   </div>
@@ -255,18 +246,18 @@ export const QuotePage: React.FC = () => {
 
                 {/* SECTION 2: ANTENNA TECHNICAL REQUIREMENTS */}
                 <div className={`space-y-4 ${stepTab !== 2 ? 'hidden sm:block' : ''}`}>
-                  <h3 className="text-lg font-bold text-white border-b border-rf-border/80 pb-2 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs flex items-center justify-center font-bold">2</span>
+                  <h3 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 flex items-center gap-2">
+                    <span className="w-6 h-6 rounded bg-blue-50 text-blue-600 font-mono text-xs flex items-center justify-center font-bold">2</span>
                     Antenna Technical Requirements
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
                     <div>
-                      <label className="block text-slate-300 mb-1">Application Field</label>
+                      <label className="block text-slate-700 mb-1">Application Field</label>
                       <select
                         value={formData.application}
                         onChange={(e) => setFormData({ ...formData, application: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-800 focus:outline-none focus:border-blue-600"
                       >
                         <option value="UAV & Drones">UAV & Drones</option>
                         <option value="IoT & Embedded Systems">IoT & Embedded Systems</option>
@@ -280,45 +271,45 @@ export const QuotePage: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Operating Frequency *</label>
+                      <label className="block text-slate-700 mb-1">Operating Frequency *</label>
                       <input
                         type="text"
                         required
                         placeholder="e.g. 5.8 GHz or 2.4 - 2.5 GHz"
                         value={formData.operatingFreq}
                         onChange={(e) => setFormData({ ...formData, operatingFreq: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Required Bandwidth</label>
+                      <label className="block text-slate-700 mb-1">Required Bandwidth</label>
                       <input
                         type="text"
                         placeholder="e.g. 200 MHz (-10 dB S11)"
                         value={formData.requiredBandwidth}
                         onChange={(e) => setFormData({ ...formData, requiredBandwidth: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Desired Peak Gain</label>
+                      <label className="block text-slate-700 mb-1">Desired Peak Gain</label>
                       <input
                         type="text"
                         placeholder="e.g. > 6 dBi Broadside"
                         value={formData.desiredGain}
                         onChange={(e) => setFormData({ ...formData, desiredGain: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Polarization</label>
+                      <label className="block text-slate-700 mb-1">Polarization</label>
                       <select
                         value={formData.polarization}
                         onChange={(e) => setFormData({ ...formData, polarization: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-800 focus:outline-none focus:border-blue-600"
                       >
                         <option value="Linear">Linear (Horizontal / Vertical)</option>
                         <option value="Circular (RHCP)">Circular (RHCP - Right Hand)</option>
@@ -328,11 +319,11 @@ export const QuotePage: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Antenna Type (If Known)</label>
+                      <label className="block text-slate-700 mb-1">Antenna Type (If Known)</label>
                       <select
                         value={formData.antennaType}
                         onChange={(e) => setFormData({ ...formData, antennaType: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-800 focus:outline-none focus:border-blue-600"
                       >
                         <option value="Microstrip Patch">Microstrip Patch</option>
                         <option value="Slot Antenna">Slot Antenna</option>
@@ -346,68 +337,68 @@ export const QuotePage: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Maximum Physical Dimensions</label>
+                      <label className="block text-slate-700 mb-1">Maximum Physical Dimensions</label>
                       <input
                         type="text"
                         placeholder="e.g. 30 × 30 × 3 mm"
                         value={formData.maxDimensions}
                         onChange={(e) => setFormData({ ...formData, maxDimensions: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Ground Plane Dimensions</label>
+                      <label className="block text-slate-700 mb-1">Ground Plane Dimensions</label>
                       <input
                         type="text"
                         placeholder="e.g. 50 × 50 mm PCB"
                         value={formData.groundPlaneDimensions}
                         onChange={(e) => setFormData({ ...formData, groundPlaneDimensions: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Preferred Substrate (If Known)</label>
+                      <label className="block text-slate-700 mb-1">Preferred Substrate (If Known)</label>
                       <input
                         type="text"
                         placeholder="e.g. Rogers RO4003C / FR4 / Taconic"
                         value={formData.substrate}
                         onChange={(e) => setFormData({ ...formData, substrate: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Connector / Feed Type</label>
+                      <label className="block text-slate-700 mb-1">Connector / Feed Type</label>
                       <input
                         type="text"
                         placeholder="e.g. SMA Female, U.FL/IPEX, Inset Microstrip"
                         value={formData.connectorType}
                         onChange={(e) => setFormData({ ...formData, connectorType: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Number of Antenna Elements</label>
+                      <label className="block text-slate-700 mb-1">Number of Antenna Elements</label>
                       <input
                         type="text"
                         placeholder="1 (Single), 2, 4, or 16-element array"
                         value={formData.numberOfElements}
                         onChange={(e) => setFormData({ ...formData, numberOfElements: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Power Handling (Watts)</label>
+                      <label className="block text-slate-700 mb-1">Power Handling (Watts)</label>
                       <input
                         type="text"
                         placeholder="e.g. 5W CW, 50W Peak"
                         value={formData.powerHandling}
                         onChange={(e) => setFormData({ ...formData, powerHandling: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
                   </div>
@@ -415,29 +406,29 @@ export const QuotePage: React.FC = () => {
 
                 {/* SECTION 3: PROJECT INFORMATION */}
                 <div className={`space-y-4 ${stepTab !== 3 ? 'hidden sm:block' : ''}`}>
-                  <h3 className="text-lg font-bold text-white border-b border-rf-border/80 pb-2 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs flex items-center justify-center font-bold">3</span>
+                  <h3 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 flex items-center gap-2">
+                    <span className="w-6 h-6 rounded bg-blue-50 text-blue-600 font-mono text-xs flex items-center justify-center font-bold">3</span>
                     Project Scope & Timeline
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
                     <div>
-                      <label className="block text-slate-300 mb-1">Expected Design Quantity</label>
+                      <label className="block text-slate-700 mb-1">Expected Design Quantity</label>
                       <input
                         type="text"
                         placeholder="e.g. 1 - 5 units (Design Phase)"
                         value={formData.quantity}
                         onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-300 mb-1">Full 3D Simulation Report Required?</label>
+                      <label className="block text-slate-700 mb-1">Full 3D Simulation Report Required?</label>
                       <select
                         value={formData.simulationReportRequired}
                         onChange={(e) => setFormData({ ...formData, simulationReportRequired: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-800 focus:outline-none focus:border-blue-600"
                       >
                         <option value="Yes">Yes - Include Comprehensive PDF & S2P Files</option>
                         <option value="No">No - Standard CAD Package Only</option>
@@ -445,24 +436,24 @@ export const QuotePage: React.FC = () => {
                     </div>
 
                     <div className="sm:col-span-2">
-                      <label className="block text-slate-300 mb-1">Target Delivery Date</label>
+                      <label className="block text-slate-700 mb-1">Target Delivery Date</label>
                       <input
                         type="text"
                         placeholder="e.g. Within 2-3 Weeks"
                         value={formData.targetDeliveryDate}
                         onChange={(e) => setFormData({ ...formData, targetDeliveryDate: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
 
                     <div className="sm:col-span-2">
-                      <label className="block text-slate-300 mb-1">Additional Requirements / Notes</label>
+                      <label className="block text-slate-700 mb-1">Additional Requirements / Notes</label>
                       <textarea
                         rows={3}
                         placeholder="Describe enclosure materials (ABS plastic, aluminum chassis, carbon fiber), temperature limits, or specific performance goals..."
                         value={formData.additionalNotes}
                         onChange={(e) => setFormData({ ...formData, additionalNotes: e.target.value })}
-                        className="w-full bg-rf-dark border border-rf-border rounded-lg px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                        className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-600"
                       />
                     </div>
                   </div>
@@ -470,8 +461,8 @@ export const QuotePage: React.FC = () => {
 
                 {/* SECTION 4: FILE UPLOAD UI */}
                 <div className={`space-y-4 ${stepTab !== 4 ? 'hidden sm:block' : ''}`}>
-                  <h3 className="text-lg font-bold text-white border-b border-rf-border/80 pb-2 flex items-center gap-2">
-                    <span className="w-6 h-6 rounded bg-cyan-500/20 text-cyan-400 font-mono text-xs flex items-center justify-center font-bold">4</span>
+                  <h3 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 flex items-center gap-2">
+                    <span className="w-6 h-6 rounded bg-blue-50 text-blue-600 font-mono text-xs flex items-center justify-center font-bold">4</span>
                     Attach Engineering Files (PCB, STEP CAD, Requirement Specs)
                   </h3>
 
@@ -484,19 +475,19 @@ export const QuotePage: React.FC = () => {
                     onDragLeave={() => setDragActive(false)}
                     onDrop={handleFileDrop}
                     className={`border-2 border-dashed rounded-xl p-6 text-center space-y-3 font-mono transition ${
-                      dragActive ? 'border-cyan-400 bg-cyan-500/10' : 'border-rf-border bg-rf-dark/60 hover:border-cyan-500/40'
+                      dragActive ? 'border-blue-600 bg-blue-50' : 'border-slate-300 bg-slate-50 hover:border-blue-400'
                     }`}
                   >
-                    <div className="w-12 h-12 bg-cyan-500/10 border border-cyan-500/30 rounded-xl flex items-center justify-center text-cyan-400 mx-auto">
+                    <div className="w-12 h-12 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-center text-blue-600 mx-auto">
                       <Upload className="w-6 h-6" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-white">Drag & drop your files here or click to browse</p>
-                      <p className="text-[10px] text-slate-400 mt-1">
+                      <p className="text-xs font-bold text-slate-900">Drag & drop your files here or click to browse</p>
+                      <p className="text-[10px] text-slate-500 mt-1">
                         Accepted: PCB (.brd, .kicad_pcb, Gerber), CAD (.step, .stp, .iges), Datasheets (.pdf, .doc), Images (.png, .jpg)
                       </p>
                     </div>
-                    <label className="inline-block px-4 py-2 bg-rf-navy hover:bg-rf-border border border-cyan-500/40 text-cyan-300 rounded-lg text-xs font-bold cursor-pointer transition">
+                    <label className="inline-block px-4 py-2 bg-white hover:bg-slate-100 border border-slate-300 text-blue-600 rounded-lg text-xs font-bold cursor-pointer transition shadow-sm">
                       Browse Files
                       <input type="file" onChange={handleFileInput} className="hidden" />
                     </label>
@@ -505,20 +496,20 @@ export const QuotePage: React.FC = () => {
                   {/* File List */}
                   {files.length > 0 && (
                     <div className="space-y-2 font-mono text-xs">
-                      <span className="text-slate-400 text-[10px] uppercase font-bold block">Attached Files:</span>
+                      <span className="text-slate-500 text-[10px] uppercase font-bold block">Attached Files:</span>
                       {files.map((file, idx) => (
-                        <div key={idx} className="flex items-center justify-between p-3 bg-rf-dark border border-rf-border rounded-lg">
+                        <div key={idx} className="flex items-center justify-between p-3 bg-slate-50 border border-slate-200 rounded-lg">
                           <div className="flex items-center gap-2.5">
-                            <FileCode className="w-4 h-4 text-cyan-400 shrink-0" />
+                            <FileCode className="w-4 h-4 text-blue-600 shrink-0" />
                             <div>
-                              <span className="text-white font-bold block">{file.name}</span>
-                              <span className="text-[10px] text-slate-400">{file.type} • {file.size}</span>
+                              <span className="text-slate-900 font-bold block">{file.name}</span>
+                              <span className="text-[10px] text-slate-500">{file.type} • {file.size}</span>
                             </div>
                           </div>
                           <button
                             type="button"
                             onClick={() => removeFile(idx)}
-                            className="p-1.5 text-slate-400 hover:text-red-400 transition"
+                            className="p-1.5 text-slate-400 hover:text-red-600 transition"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -528,15 +519,15 @@ export const QuotePage: React.FC = () => {
                   )}
                 </div>
 
-                <div className="pt-4 border-t border-rf-border flex items-center justify-between">
-                  <div className="text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
-                    <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                <div className="pt-4 border-t border-slate-200 flex items-center justify-between">
+                  <div className="text-[11px] font-mono text-slate-600 flex items-center gap-1.5">
+                    <ShieldCheck className="w-4 h-4 text-blue-600" />
                     Confidentiality Guaranteed (NDA Supported)
                   </div>
 
                   <button
                     type="submit"
-                    className="px-8 py-4 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-mono font-bold text-xs sm:text-sm rounded-xl shadow-xl shadow-cyan-500/25 transition flex items-center gap-2"
+                    className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-mono font-bold text-xs sm:text-sm rounded-xl shadow-md transition flex items-center gap-2"
                   >
                     <span>Submit RF Requirement</span>
                     <ArrowRight className="w-4 h-4" />
@@ -546,55 +537,55 @@ export const QuotePage: React.FC = () => {
             </div>
 
             {/* Right Live Spec Summary Side-Panel (4 Cols) */}
-            <div className="lg:col-span-4 bg-rf-navy/90 border border-rf-border rounded-2xl p-6 space-y-5 shadow-2xl font-mono text-xs sticky top-28">
-              <div className="flex items-center justify-between border-b border-rf-border pb-3">
-                <span className="font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                  <Radio className="w-4 h-4 text-cyan-400" />
+            <div className="lg:col-span-4 bg-white border border-slate-200 rounded-2xl p-6 space-y-5 shadow-sm font-mono text-xs sticky top-28">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+                <span className="font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                  <Radio className="w-4 h-4 text-blue-600" />
                   Live Requirement Summary
                 </span>
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                <span className="w-2 h-2 rounded-full bg-blue-600 animate-ping" />
               </div>
 
-              <div className="space-y-3 text-slate-300">
-                <div className="p-2.5 bg-rf-dark rounded-lg border border-rf-border/80">
+              <div className="space-y-3 text-slate-700">
+                <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
                   <span className="text-[10px] text-slate-500 block">APPLICATION</span>
-                  <strong className="text-cyan-300">{formData.application}</strong>
+                  <strong className="text-blue-700">{formData.application}</strong>
                 </div>
 
-                <div className="p-2.5 bg-rf-dark rounded-lg border border-rf-border/80">
+                <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
                   <span className="text-[10px] text-slate-500 block">TARGET OPERATING FREQUENCY</span>
-                  <strong className="text-cyan-300 text-sm font-bold">{formData.operatingFreq || 'Not Specified'}</strong>
+                  <strong className="text-blue-700 text-sm font-bold">{formData.operatingFreq || 'Not Specified'}</strong>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="p-2 bg-rf-dark rounded-lg border border-rf-border/80">
+                  <div className="p-2 bg-slate-50 rounded-lg border border-slate-200">
                     <span className="text-[10px] text-slate-500 block">TARGET GAIN</span>
-                    <strong className="text-slate-200">{formData.desiredGain}</strong>
+                    <strong className="text-slate-800">{formData.desiredGain}</strong>
                   </div>
-                  <div className="p-2 bg-rf-dark rounded-lg border border-rf-border/80">
+                  <div className="p-2 bg-slate-50 rounded-lg border border-slate-200">
                     <span className="text-[10px] text-slate-500 block">POLARIZATION</span>
-                    <strong className="text-slate-200">{formData.polarization}</strong>
+                    <strong className="text-slate-800">{formData.polarization}</strong>
                   </div>
                 </div>
 
-                <div className="p-2.5 bg-rf-dark rounded-lg border border-rf-border/80">
+                <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
                   <span className="text-[10px] text-slate-500 block">ANTENNA TYPE</span>
-                  <strong className="text-slate-200">{formData.antennaType}</strong>
+                  <strong className="text-slate-800">{formData.antennaType}</strong>
                 </div>
 
-                <div className="p-2.5 bg-rf-dark rounded-lg border border-rf-border/80">
+                <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
                   <span className="text-[10px] text-slate-500 block">MAX SIZE CONSTRAINT</span>
-                  <strong className="text-slate-200">{formData.maxDimensions}</strong>
+                  <strong className="text-slate-800">{formData.maxDimensions}</strong>
                 </div>
 
-                <div className="p-2.5 bg-rf-dark rounded-lg border border-rf-border/80">
+                <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200">
                   <span className="text-[10px] text-slate-500 block">PREFERRED SUBSTRATE</span>
-                  <strong className="text-slate-200">{formData.substrate}</strong>
+                  <strong className="text-slate-800">{formData.substrate}</strong>
                 </div>
               </div>
 
-              <div className="p-3 bg-cyan-950/30 border border-cyan-500/20 rounded-xl space-y-1.5 font-sans text-slate-300 text-[11px]">
-                <div className="flex items-center gap-1.5 text-cyan-400 font-mono font-bold">
+              <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl space-y-1.5 font-sans text-slate-700 text-[11px]">
+                <div className="flex items-center gap-1.5 text-blue-700 font-mono font-bold">
                   <Clock className="w-3.5 h-3.5" />
                   <span>SLA Response Commitment</span>
                 </div>

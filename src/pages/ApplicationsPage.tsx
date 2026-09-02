@@ -141,18 +141,18 @@ export const ApplicationsPage: React.FC<{ setCurrentPage: (page: string) => void
   const filtered = filterCategory === 'all' ? apps : apps.filter((a) => a.category === filterCategory);
 
   return (
-    <div className="min-h-screen bg-rf-dark text-slate-100 font-sans pt-28 pb-20">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans pt-28 pb-20">
       {/* HEADER */}
-      <section className="relative py-12 bg-radial-gradient border-b border-rf-border">
+      <section className="relative py-12 bg-radial-gradient border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 rounded-full font-mono text-xs font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 border border-blue-200 text-blue-700 rounded-full font-mono text-xs font-semibold">
             <Radio className="w-3.5 h-3.5" />
             APPLICATION DOMAINS
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
             Target Industry Applications
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             Engineered antenna solutions designed around the physical, electrical, and environmental constraints of modern technology sectors.
           </p>
 
@@ -170,8 +170,8 @@ export const ApplicationsPage: React.FC<{ setCurrentPage: (page: string) => void
                 onClick={() => setFilterCategory(tab.id)}
                 className={`px-4 py-2 rounded-xl transition border ${
                   filterCategory === tab.id
-                    ? 'bg-cyan-400 text-slate-950 font-bold border-cyan-400 shadow-md'
-                    : 'bg-rf-navy text-slate-300 border-rf-border hover:border-cyan-500/40'
+                    ? 'bg-blue-600 text-white font-bold border-blue-600 shadow-sm'
+                    : 'bg-white text-slate-700 border-slate-200 hover:border-blue-300'
                 }`}
               >
                 {tab.label}
@@ -189,29 +189,29 @@ export const ApplicationsPage: React.FC<{ setCurrentPage: (page: string) => void
             return (
               <div
                 key={app.id}
-                className="bg-rf-navy/80 border border-rf-border rounded-2xl p-6 space-y-4 hover:border-cyan-500/40 transition duration-300 shadow-xl flex flex-col justify-between"
+                className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 hover:border-blue-400 transition duration-300 shadow-sm hover:shadow-md flex flex-col justify-between"
               >
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-cyan-400">
+                    <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl text-blue-600">
                       <IconComponent className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white">{app.title}</h3>
-                      <span className="text-xs font-mono text-cyan-300 font-medium">{app.subtitle}</span>
+                      <h3 className="text-xl font-bold text-slate-900">{app.title}</h3>
+                      <span className="text-xs font-mono text-blue-700 font-medium">{app.subtitle}</span>
                     </div>
                   </div>
 
-                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">{app.desc}</p>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{app.desc}</p>
 
                   <div className="pt-2 space-y-2">
-                    <h4 className="font-mono text-xs font-bold text-slate-200 uppercase tracking-wider">
+                    <h4 className="font-mono text-xs font-bold text-slate-800 uppercase tracking-wider">
                       Key Technical Requirements:
                     </h4>
-                    <ul className="space-y-1.5 font-mono text-xs text-slate-400">
+                    <ul className="space-y-1.5 font-mono text-xs text-slate-600">
                       {app.requirements.map((req, rIdx) => (
                         <li key={rIdx} className="flex items-start gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
                           <span>{req}</span>
                         </li>
                       ))}
@@ -219,14 +219,14 @@ export const ApplicationsPage: React.FC<{ setCurrentPage: (page: string) => void
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-rf-border/80 flex items-center justify-between font-mono text-xs">
+                <div className="pt-4 border-t border-slate-200 flex items-center justify-between font-mono text-xs">
                   <div>
                     <span className="text-[10px] text-slate-500 block">Recommended Architecture</span>
-                    <span className="text-cyan-300 font-bold">{app.recommendedTech}</span>
+                    <span className="text-blue-700 font-bold">{app.recommendedTech}</span>
                   </div>
                   <button
                     onClick={() => setCurrentPage('quote')}
-                    className="px-3.5 py-2 bg-cyan-500/20 hover:bg-cyan-400 hover:text-slate-950 text-cyan-300 border border-cyan-500/30 rounded-lg transition font-bold"
+                    className="px-3.5 py-2 bg-blue-50 hover:bg-blue-600 hover:text-white text-blue-700 border border-blue-200 rounded-lg transition font-bold"
                   >
                     Request Design
                   </button>
@@ -240,13 +240,13 @@ export const ApplicationsPage: React.FC<{ setCurrentPage: (page: string) => void
       {/* CTA SECTION */}
       <section className="py-16 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Have a Specific Application Constraint?</h2>
-          <p className="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto font-mono">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">Have a Specific Application Constraint?</h2>
+          <p className="text-slate-600 text-xs sm:text-sm max-w-lg mx-auto font-mono">
             Tell us about your enclosure dimensions, operating environment, and ground plane limitations.
           </p>
           <button
             onClick={() => setCurrentPage('quote')}
-            className="px-8 py-3.5 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-mono font-bold text-xs rounded-xl shadow-xl shadow-cyan-500/20 transition inline-flex items-center gap-2"
+            className="px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-mono font-bold text-xs rounded-xl shadow-lg shadow-blue-500/20 transition inline-flex items-center gap-2"
           >
             <span>Submit Your RF Requirement</span>
             <ArrowRight className="w-4 h-4" />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calculator, Cpu, ShieldCheck, ArrowRight, Zap } from 'lucide-react';
+import { Calculator, Zap } from 'lucide-react';
 
 interface Substrate {
   name: string;
@@ -21,41 +21,36 @@ export const RFCalculator: React.FC = () => {
   const [hMm, setHMm] = useState<number>(0.813);
 
   // RF Patch Formulas
-  const c = 3e8; // speed of light m/s
+  const c = 3e8;
   const fHz = freqGHz * 1e9;
   const er = selectedSubstrate.er;
-  const h = hMm / 1000; // in meters
+  const h = hMm / 1000;
 
-  // Patch Width W = c / (2 * f) * sqrt(2 / (er + 1))
   const widthM = (c / (2 * fHz)) * Math.sqrt(2 / (er + 1));
   const widthMm = widthM * 1000;
 
-  // Effective Dielectric Constant er_eff = (er + 1)/2 + (er - 1)/2 * (1 + 12 * h / W)^(-0.5)
   const erEff = (er + 1) / 2 + ((er - 1) / 2) * Math.pow(1 + (12 * h) / widthM, -0.5);
 
-  // Length extension deltaL
   const deltaL = 0.412 * h * ((erEff + 0.3) * (widthMm / hMm + 0.264)) / ((erEff - 0.258) * (widthMm / hMm + 0.8));
   
-  // Physical Length L = c / (2 * f * sqrt(er_eff)) - 2 * deltaL
   const lengthM = c / (2 * fHz * Math.sqrt(erEff)) - 2 * (deltaL / 1000);
   const lengthMm = lengthM * 1000;
 
-  // Guided wavelength lambda_g
   const lambdaGMm = (c / (fHz * Math.sqrt(erEff))) * 1000;
 
   return (
-    <div className="w-full bg-rf-navy/90 rounded-2xl border border-rf-border p-6 shadow-2xl backdrop-blur-md">
-      <div className="flex items-center justify-between pb-4 mb-5 border-b border-rf-border/80">
+    <div className="w-full bg-white rounded-2xl border border-slate-200 p-6 shadow-md">
+      <div className="flex items-center justify-between pb-4 mb-5 border-b border-slate-200">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30">
-            <Calculator className="w-5 h-5 text-cyan-400" />
+          <div className="p-2 bg-blue-50 rounded-lg border border-blue-200">
+            <Calculator className="w-5 h-5 text-blue-600" />
           </div>
           <div>
-            <h3 className="text-lg font-bold text-white tracking-wide">Interactive Microstrip Patch Design Estimator</h3>
-            <p className="text-xs text-slate-400 font-mono">Formulas based on Transmission Line Model & Cavity Solver</p>
+            <h3 className="text-lg font-bold text-slate-900 tracking-wide">Interactive Microstrip Patch Design Estimator</h3>
+            <p className="text-xs text-slate-500 font-mono">Formulas based on Transmission Line Model & Cavity Solver</p>
           </div>
         </div>
-        <span className="hidden sm:inline-block px-3 py-1 bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 rounded-full text-xs font-mono">
+        <span className="hidden sm:inline-block px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-mono font-semibold">
           EM Parametric Engine
         </span>
       </div>
@@ -64,9 +59,9 @@ export const RFCalculator: React.FC = () => {
         {/* Controls */}
         <div className="lg:col-span-5 space-y-4">
           <div>
-            <label className="block text-xs font-mono text-slate-300 mb-1.5 flex justify-between">
+            <label className="block text-xs font-mono text-slate-700 mb-1.5 flex justify-between">
               <span>Target Operating Frequency (f₀)</span>
-              <span className="text-cyan-400 font-bold">{freqGHz.toFixed(2)} GHz</span>
+              <span className="text-blue-600 font-bold">{freqGHz.toFixed(2)} GHz</span>
             </label>
             <input
               type="range"
@@ -75,7 +70,7 @@ export const RFCalculator: React.FC = () => {
               step="0.1"
               value={freqGHz}
               onChange={(e) => setFreqGHz(parseFloat(e.target.value))}
-              className="w-full h-2 bg-rf-border rounded-lg accent-cyan-400 cursor-pointer"
+              className="w-full h-2 bg-slate-200 rounded-lg accent-blue-600 cursor-pointer"
             />
             <div className="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
               <span>Sub-GHz</span>
@@ -87,7 +82,7 @@ export const RFCalculator: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-mono text-slate-300 mb-1.5">Substrate Dielectric Material</label>
+            <label className="block text-xs font-mono text-slate-700 mb-1.5">Substrate Dielectric Material</label>
             <select
               value={selectedSubstrate.name}
               onChange={(e) => {
@@ -95,7 +90,7 @@ export const RFCalculator: React.FC = () => {
                 setSelectedSubstrate(sub);
                 setHMm(sub.hDefault);
               }}
-              className="w-full bg-rf-dark border border-rf-border rounded-lg px-3 py-2 text-xs font-mono text-slate-200 focus:outline-none focus:border-cyan-400"
+              className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-800 focus:outline-none focus:border-blue-600"
             >
               {SUBSTRATES.map((sub) => (
                 <option key={sub.name} value={sub.name}>
@@ -106,9 +101,9 @@ export const RFCalculator: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-mono text-slate-300 mb-1.5 flex justify-between">
+            <label className="block text-xs font-mono text-slate-700 mb-1.5 flex justify-between">
               <span>Substrate Height (h)</span>
-              <span className="text-cyan-400 font-bold">{hMm.toFixed(3)} mm</span>
+              <span className="text-blue-600 font-bold">{hMm.toFixed(3)} mm</span>
             </label>
             <input
               type="number"
@@ -117,44 +112,44 @@ export const RFCalculator: React.FC = () => {
               max="6.0"
               value={hMm}
               onChange={(e) => setHMm(parseFloat(e.target.value) || 0.813)}
-              className="w-full bg-rf-dark border border-rf-border rounded-lg px-3 py-2 text-xs font-mono text-slate-200 focus:outline-none focus:border-cyan-400"
+              className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs font-mono text-slate-800 focus:outline-none focus:border-blue-600"
             />
           </div>
         </div>
 
         {/* Dynamic Computed Outputs */}
-        <div className="lg:col-span-7 bg-rf-dark/80 rounded-xl border border-rf-border p-4 space-y-4">
-          <h4 className="text-xs font-mono text-slate-400 border-b border-rf-border pb-2 flex items-center justify-between">
+        <div className="lg:col-span-7 bg-slate-50 rounded-xl border border-slate-200 p-4 space-y-4">
+          <h4 className="text-xs font-mono text-slate-600 border-b border-slate-200 pb-2 flex items-center justify-between">
             <span>COMPUTED DIMENSIONS & PARAMETERS</span>
-            <span className="text-cyan-400 font-bold">εr,eff = {erEff.toFixed(3)}</span>
+            <span className="text-blue-600 font-bold">εr,eff = {erEff.toFixed(3)}</span>
           </h4>
 
           <div className="grid grid-cols-2 gap-3 font-mono">
-            <div className="p-3 bg-rf-navy/90 rounded-lg border border-rf-border/80">
-              <span className="text-[10px] text-slate-400 block">Patch Width (W)</span>
-              <span className="text-lg font-bold text-cyan-300">{widthMm.toFixed(2)} mm</span>
+            <div className="p-3 bg-white rounded-lg border border-slate-200 shadow-sm">
+              <span className="text-[10px] text-slate-500 block">Patch Width (W)</span>
+              <span className="text-lg font-bold text-blue-600">{widthMm.toFixed(2)} mm</span>
             </div>
 
-            <div className="p-3 bg-rf-navy/90 rounded-lg border border-rf-border/80">
-              <span className="text-[10px] text-slate-400 block">Patch Length (L)</span>
-              <span className="text-lg font-bold text-cyan-300">{lengthMm.toFixed(2)} mm</span>
+            <div className="p-3 bg-white rounded-lg border border-slate-200 shadow-sm">
+              <span className="text-[10px] text-slate-500 block">Patch Length (L)</span>
+              <span className="text-lg font-bold text-blue-600">{lengthMm.toFixed(2)} mm</span>
             </div>
 
-            <div className="p-3 bg-rf-navy/90 rounded-lg border border-rf-border/80">
-              <span className="text-[10px] text-slate-400 block">Guided Wavelength (λg)</span>
-              <span className="text-sm font-bold text-slate-200">{lambdaGMm.toFixed(2)} mm</span>
+            <div className="p-3 bg-white rounded-lg border border-slate-200 shadow-sm">
+              <span className="text-[10px] text-slate-500 block">Guided Wavelength (λg)</span>
+              <span className="text-sm font-bold text-slate-800">{lambdaGMm.toFixed(2)} mm</span>
             </div>
 
-            <div className="p-3 bg-rf-navy/90 rounded-lg border border-rf-border/80">
-              <span className="text-[10px] text-slate-400 block">Suggested Ground (Wg × Lg)</span>
-              <span className="text-sm font-bold text-slate-200">
+            <div className="p-3 bg-white rounded-lg border border-slate-200 shadow-sm">
+              <span className="text-[10px] text-slate-500 block">Suggested Ground (Wg × Lg)</span>
+              <span className="text-sm font-bold text-slate-800">
                 {(widthMm + 6 * hMm).toFixed(1)} × {(lengthMm + 6 * hMm).toFixed(1)} mm
               </span>
             </div>
           </div>
 
-          <div className="p-3 bg-cyan-950/20 border border-cyan-500/20 rounded-lg text-xs text-slate-300 flex items-start gap-2">
-            <Zap className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+          <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-xs text-slate-700 flex items-start gap-2">
+            <Zap className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
             <p className="leading-relaxed">
               These initial specs serve as the analytical seed. Our engineering team performs full 3D Finite Element Analysis (FEA) in HFSS to optimize feed insertion point ($y_0$), surface wave suppression, cross-polarization, and broadside gain.
             </p>

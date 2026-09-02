@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Radio, Menu, X, ArrowRight, ShieldCheck, Cpu } from 'lucide-react';
+import { Radio, Menu, X, ArrowRight } from 'lucide-react';
 
 interface NavbarProps {
   currentPage: string;
@@ -42,8 +42,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) =
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-rf-dark/95 backdrop-blur-md border-b border-rf-border shadow-xl py-3'
-          : 'bg-rf-dark/80 backdrop-blur-sm border-b border-rf-border/50 py-4.5'
+          ? 'bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm py-3'
+          : 'bg-white/80 backdrop-blur-sm border-b border-slate-200/60 py-4.5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -52,17 +52,17 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) =
           onClick={() => handleNavClick('home')}
           className="flex items-center gap-3 group text-left focus:outline-none"
         >
-          <div className="relative w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/40 flex items-center justify-center group-hover:border-cyan-400 group-hover:bg-cyan-500/20 transition-all duration-300 shadow-md">
-            <Radio className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition-transform" />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-cyan-400 rounded-full animate-ping opacity-75" />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-cyan-400 rounded-full" />
+          <div className="relative w-10 h-10 rounded-lg bg-blue-600/10 border border-blue-600/30 flex items-center justify-center group-hover:border-blue-600 group-hover:bg-blue-600/15 transition-all duration-300 shadow-sm">
+            <Radio className="w-5 h-5 text-blue-600 group-hover:scale-110 transition-transform" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-blue-600 rounded-full animate-ping opacity-75" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-blue-600 rounded-full" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-mono font-bold text-xl tracking-wider text-white">ANTEYN<span className="text-cyan-400">X</span></span>
-              <span className="px-1.5 py-0.5 bg-rf-border/80 text-[10px] font-mono text-cyan-300 rounded border border-cyan-500/20">RF</span>
+              <span className="font-mono font-bold text-xl tracking-wider text-slate-900">ANTEYN<span className="text-blue-600">X</span></span>
+              <span className="px-1.5 py-0.5 bg-blue-50 text-[10px] font-mono text-blue-700 rounded border border-blue-200 font-semibold">RF</span>
             </div>
-            <span className="text-[10px] text-slate-400 font-mono tracking-tight block">Custom Antenna Engineering</span>
+            <span className="text-[10px] text-slate-500 font-mono tracking-tight block">Custom Antenna Engineering</span>
           </div>
         </button>
 
@@ -74,8 +74,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) =
               onClick={() => handleNavClick(item.id)}
               className={`px-3 py-2 text-xs font-mono font-medium rounded-md transition-all duration-200 ${
                 currentPage === item.id
-                  ? 'text-cyan-300 bg-cyan-500/15 border border-cyan-500/30'
-                  : 'text-slate-300 hover:text-cyan-300 hover:bg-rf-navy/60'
+                  ? 'text-blue-600 bg-blue-50 border border-blue-200 font-bold'
+                  : 'text-slate-700 hover:text-blue-600 hover:bg-slate-100'
               }`}
             >
               {item.label}
@@ -87,10 +87,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) =
         <div className="hidden sm:flex items-center gap-3">
           <button
             onClick={() => handleNavClick('quote')}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-mono text-xs font-semibold tracking-wide transition-all duration-300 shadow-lg ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-mono text-xs font-semibold tracking-wide transition-all duration-300 shadow-md ${
               currentPage === 'quote'
-                ? 'bg-cyan-400 text-slate-950 font-bold shadow-cyan-500/30 shadow-lg scale-105'
-                : 'bg-cyan-500/20 hover:bg-cyan-400 hover:text-slate-950 text-cyan-300 border border-cyan-400/50 hover:shadow-cyan-500/25'
+                ? 'bg-blue-600 text-white font-bold shadow-blue-500/20 scale-105'
+                : 'bg-blue-600 hover:bg-blue-700 text-white border border-blue-600 shadow-blue-500/10'
             }`}
           >
             <span>Request a Quote</span>
@@ -101,7 +101,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) =
         {/* Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 text-slate-300 hover:text-white hover:bg-rf-navy rounded-lg border border-rf-border"
+          className="lg:hidden p-2 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-lg border border-slate-200"
           aria-label="Toggle Navigation Menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -110,24 +110,24 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) =
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-rf-dark/98 border-b border-rf-border px-4 pt-3 pb-6 space-y-2 mt-2 backdrop-blur-xl animate-fadeIn">
+        <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-2 mt-2 shadow-xl animate-fadeIn">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => handleNavClick(item.id)}
               className={`w-full text-left px-4 py-3 rounded-lg font-mono text-sm transition-all ${
                 currentPage === item.id
-                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold'
-                  : 'text-slate-300 hover:bg-rf-navy'
+                  ? 'bg-blue-50 text-blue-600 border border-blue-200 font-bold'
+                  : 'text-slate-700 hover:bg-slate-100'
               }`}
             >
               {item.label}
             </button>
           ))}
-          <div className="pt-2 border-t border-rf-border">
+          <div className="pt-2 border-t border-slate-200">
             <button
               onClick={() => handleNavClick('quote')}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-cyan-400 text-slate-950 font-mono text-sm font-bold rounded-lg shadow-md"
+              className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-700 text-white font-mono text-sm font-bold rounded-lg shadow-md"
             >
               <span>Request an Antenna Design</span>
               <ArrowRight className="w-4 h-4" />
