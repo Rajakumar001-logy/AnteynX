@@ -1,7 +1,5 @@
 import React from 'react';
 import { EMWaveVisualizer } from '../components/EMWaveVisualizer';
-import { S11Plotter } from '../components/S11Plotter';
-import { RFCalculator } from '../components/RFCalculator';
 import {
   Radio,
   Cpu,
@@ -290,113 +288,6 @@ export const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                 <p className="text-slate-600 text-xs leading-relaxed">{step.desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* INTERACTIVE RF ESTIMATOR TEASER */}
-      <section className="py-16 bg-white border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="text-center max-w-xl mx-auto space-y-2 mb-8">
-            <span className="text-xs font-mono text-blue-600 font-bold tracking-wider">INTERACTIVE TOOL</span>
-            <h2 className="text-2xl font-extrabold text-slate-900">Calculate Initial Patch Antenna Dimensions</h2>
-            <p className="text-slate-600 text-xs">Try our interactive parametric tool to estimate physical patch geometry.</p>
-          </div>
-          <RFCalculator />
-        </div>
-      </section>
-
-      {/* FEATURED DEMONSTRATION PROJECTS HIGHLIGHT */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
-            <div>
-              <span className="text-xs font-mono text-blue-600 font-bold tracking-wider uppercase">Engineering Portfolio</span>
-              <h2 className="text-3xl font-extrabold text-slate-900 mt-1">Featured Design Demonstrations</h2>
-              <p className="text-slate-600 text-xs mt-1">Sample antenna projects demonstrating design & simulation capabilities.</p>
-            </div>
-
-            <div className="inline-block px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-lg text-amber-700 font-mono text-xs font-semibold">
-              ★ All Projects Labeled Demonstration Project
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Project 1 */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 hover:border-blue-400 transition shadow-sm">
-              <div className="flex items-center justify-between">
-                <span className="px-2.5 py-1 bg-amber-50 text-amber-700 font-mono text-[10px] rounded border border-amber-200 font-bold">
-                  DEMONSTRATION PROJECT
-                </span>
-                <span className="text-xs font-mono text-slate-500">Freq: 5.8 GHz</span>
-              </div>
-              <h3 className="text-lg font-bold text-slate-900">Compact 5.8 GHz UAV Microstrip Patch</h3>
-              <p className="text-slate-600 text-xs leading-relaxed">
-                Custom broadside microstrip patch antenna designed on Rogers RO4003C for 5.8 GHz drone telemetry and video links.
-              </p>
-              <S11Plotter centerFreq={5.8} bandwidth="320 MHz (5.64 - 5.96 GHz)" minS11={-31.5} title="S11 Return Loss (5.8 GHz UAV Patch)" />
-            </div>
-
-            {/* Project 2 */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 hover:border-blue-400 transition shadow-sm">
-              <div className="flex items-center justify-between">
-                <span className="px-2.5 py-1 bg-amber-50 text-amber-700 font-mono text-[10px] rounded border border-amber-200 font-bold">
-                  DEMONSTRATION PROJECT
-                </span>
-                <span className="text-xs font-mono text-slate-500">Freq: 2.4 GHz</span>
-              </div>
-              <h3 className="text-lg font-bold text-slate-900">2.4 GHz Compact Printed IoT Antenna</h3>
-              <p className="text-slate-600 text-xs leading-relaxed">
-                Space-constrained meandered printed antenna engineered for embedded Wi-Fi/Bluetooth IoT sensor nodes.
-              </p>
-              <S11Plotter centerFreq={2.45} bandwidth="120 MHz (2.39 - 2.51 GHz)" minS11={-26.8} title="S11 Return Loss (2.4 GHz IoT Antenna)" />
-            </div>
-          </div>
-
-          <div className="text-center mt-10">
-            <button
-              onClick={() => setCurrentPage('portfolio')}
-              className="px-6 py-3 bg-white hover:bg-slate-100 text-blue-600 border border-slate-300 rounded-xl font-mono text-xs font-bold transition shadow-sm"
-            >
-              View Full Engineering Portfolio & Specifications
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ROADMAP BANNER */}
-      <section className="py-16 bg-white border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-xl mx-auto mb-10">
-            <span className="text-xs font-mono text-blue-600 font-bold tracking-wider uppercase">Strategic Vision</span>
-            <h2 className="text-2xl font-extrabold text-slate-900 mt-1">Our Engineering Capabilities Roadmap</h2>
-            <p className="text-slate-600 text-xs mt-1">We are committed to clear, transparent communication of current vs future capabilities.</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono">
-            <div className="p-5 bg-blue-50 border-2 border-blue-600 rounded-xl space-y-2 shadow-sm">
-              <span className="px-2 py-0.5 bg-blue-600 text-white font-bold text-[10px] rounded">CURRENT PHASE</span>
-              <h4 className="font-bold text-slate-900 text-sm">NOW</h4>
-              <p className="text-blue-800 text-xs font-medium">Custom Antenna Design & 3D EM Simulation (HFSS/CST)</p>
-            </div>
-
-            <div className="p-5 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
-              <span className="px-2 py-0.5 bg-slate-200 text-slate-700 font-bold text-[10px] rounded">PHASE 2</span>
-              <h4 className="font-bold text-slate-800 text-sm">NEXT</h4>
-              <p className="text-slate-600 text-xs">Antenna Prototype Fabrication & PCB Milling</p>
-            </div>
-
-            <div className="p-5 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
-              <span className="px-2 py-0.5 bg-slate-200 text-slate-700 font-bold text-[10px] rounded">PHASE 3</span>
-              <h4 className="font-bold text-slate-800 text-sm">FUTURE</h4>
-              <p className="text-slate-600 text-xs">RF Testing, VNA Measurement & Anechoic Characterization</p>
-            </div>
-
-            <div className="p-5 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
-              <span className="px-2 py-0.5 bg-slate-200 text-slate-700 font-bold text-[10px] rounded">PHASE 4</span>
-              <h4 className="font-bold text-slate-800 text-sm">VISION</h4>
-              <p className="text-slate-600 text-xs">Small-Batch Antenna Manufacturing & Complete RF Solutions</p>
-            </div>
           </div>
         </div>
       </section>

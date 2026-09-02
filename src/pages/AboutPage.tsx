@@ -1,5 +1,5 @@
 import React from 'react';
-import { Radio, ArrowRight, AlertTriangle, Clock } from 'lucide-react';
+import { Radio, ArrowRight, AlertTriangle } from 'lucide-react';
 
 export const AboutPage: React.FC<{ setCurrentPage: (page: string) => void }> = ({ setCurrentPage }) => {
   return (
@@ -51,66 +51,6 @@ export const AboutPage: React.FC<{ setCurrentPage: (page: string) => void }> = (
           <p className="leading-relaxed text-slate-600">
             AnteynX is initially focused strictly on <strong>custom antenna design and electromagnetic simulation</strong>. We do not claim existing in-house manufacturing plants, anechoic chamber testing facilities, or accredited certification labs. Our deliverables focus on full 3D CAD modeling, HFSS/CST full-wave electromagnetic analysis, Gerber/DXF layouts, and comprehensive engineering reports.
           </p>
-        </div>
-      </section>
-
-      {/* FUTURE ROADMAP */}
-      <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-xl mx-auto mb-12 space-y-2">
-          <span className="text-xs font-mono text-blue-600 font-bold tracking-wider uppercase">CAPABILITY EVOLUTION</span>
-          <h2 className="text-3xl font-extrabold text-slate-900">Our Strategic Roadmap</h2>
-          <p className="text-slate-600 text-xs sm:text-sm">Phased expansion plan from computational design to small-batch production.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-mono">
-          {/* NOW */}
-          <div className="bg-blue-50 border-2 border-blue-600 rounded-2xl p-6 space-y-4 shadow-sm">
-            <div className="flex items-center justify-between">
-              <span className="px-2.5 py-1 bg-blue-600 text-white font-bold text-[10px] rounded">PHASE 1 (ACTIVE)</span>
-              <Clock className="w-4 h-4 text-blue-600" />
-            </div>
-            <h3 className="text-xl font-bold text-slate-900">NOW</h3>
-            <h4 className="text-blue-700 text-xs font-bold">Custom Antenna Design & EM Simulation</h4>
-            <p className="text-slate-600 text-xs leading-relaxed font-sans">
-              3D electromagnetic modeling in HFSS & CST, impedance tuning, bandwidth optimization, radiation pattern synthesis, and Gerber/STEP CAD generation.
-            </p>
-          </div>
-
-          {/* NEXT */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
-            <div className="flex items-center justify-between">
-              <span className="px-2.5 py-1 bg-slate-100 text-slate-600 font-bold text-[10px] rounded">PHASE 2 (PLANNED)</span>
-            </div>
-            <h3 className="text-xl font-bold text-slate-800">NEXT</h3>
-            <h4 className="text-slate-700 text-xs font-bold">Antenna Prototype Fabrication</h4>
-            <p className="text-slate-600 text-xs leading-relaxed font-sans">
-              Rapid physical prototyping via precision PCB milling and fast-turn RF substrate etching for initial physical validation.
-            </p>
-          </div>
-
-          {/* FUTURE */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
-            <div className="flex items-center justify-between">
-              <span className="px-2.5 py-1 bg-slate-100 text-slate-600 font-bold text-[10px] rounded">PHASE 3 (FUTURE)</span>
-            </div>
-            <h3 className="text-xl font-bold text-slate-800">FUTURE</h3>
-            <h4 className="text-slate-700 text-xs font-bold">RF Testing & Characterization</h4>
-            <p className="text-slate-600 text-xs leading-relaxed font-sans">
-              Vector Network Analyzer (VNA) S-parameter measurement, gain calibration, and far-field radiation pattern testing.
-            </p>
-          </div>
-
-          {/* VISION */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
-            <div className="flex items-center justify-between">
-              <span className="px-2.5 py-1 bg-slate-100 text-slate-600 font-bold text-[10px] rounded">PHASE 4 (VISION)</span>
-            </div>
-            <h3 className="text-xl font-bold text-slate-800">VISION</h3>
-            <h4 className="text-slate-700 text-xs font-bold">Small-Batch Manufacturing</h4>
-            <p className="text-slate-600 text-xs leading-relaxed font-sans">
-              Small-batch antenna production, automated pick-and-place assembly, and turn-key RF engineering solutions.
-            </p>
-          </div>
         </div>
       </section>
 
