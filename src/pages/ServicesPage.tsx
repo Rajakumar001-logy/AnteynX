@@ -137,16 +137,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ setCurrentPage }) =>
 
                   <p className="text-blue-700 font-mono text-xs font-semibold">{service.tagline}</p>
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{service.desc}</p>
-
-                  <div className="pt-2">
-                    <button
-                      onClick={() => setCurrentPage('quote')}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-mono text-xs font-bold rounded-lg transition"
-                    >
-                      <span>Request This Service</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
                 </div>
 
                 <div className="lg:col-span-5 bg-slate-50 rounded-xl border border-slate-200 p-5 space-y-3 font-mono">
