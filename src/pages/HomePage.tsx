@@ -1,5 +1,5 @@
 import React from 'react';
-import { EMWaveVisualizer } from '../components/EMWaveVisualizer';
+import { HeroGainVisualizer } from '../components/HeroGainVisualizer';
 import {
   Radio,
   Cpu,
@@ -95,9 +95,9 @@ export const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
               </div>
             </div>
 
-            {/* Right Visualizer */}
+            {/* Right Visualizer: Ansys HFSS 3D Gain Plot Visualizer */}
             <div className="lg:col-span-6">
-              <EMWaveVisualizer interactive={true} />
+              <HeroGainVisualizer />
             </div>
           </div>
         </div>
