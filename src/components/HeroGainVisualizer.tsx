@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, Play, Pause, ChevronRight, ChevronLeft, ShieldCheck, Sparkles, Maximize2, X, RefreshCw } from 'lucide-react';
+import { Activity, Play, Pause, ChevronRight, ChevronLeft, Maximize2, X } from 'lucide-react';
 
 interface GainPlot {
   id: string;
@@ -10,7 +10,6 @@ interface GainPlot {
   solver: string;
   application: string;
   description: string;
-  color: string;
 }
 
 const GAIN_PLOTS: GainPlot[] = [
@@ -20,10 +19,9 @@ const GAIN_PLOTS: GainPlot[] = [
     maxGain: '20.59 dBi',
     minGain: '-51.77 dBi',
     imageSrc: '/assets/ansys-gain-plot-20.59dB.png',
-    solver: 'Ansys HFSS 2024 R1 (FEA Engine)',
+    solver: 'Ansys HFSS FEA Engine',
     application: '5G mmWave & Long-Range Telemetry Array',
-    description: 'Full 3D spherical gain total plot extracted from Finite Element Analysis. Displays sharp broadside main beam with sidelobe suppression.',
-    color: 'from-blue-600 to-sky-500'
+    description: '3D gain plot cropped to broadside radiation lobe. Displays sharp main beam directivity and sidelobe nulls.'
   },
   {
     id: 'plot-2',
@@ -31,10 +29,9 @@ const GAIN_PLOTS: GainPlot[] = [
     maxGain: '18.67 dBi',
     minGain: '-43.29 dBi',
     imageSrc: '/assets/ansys-gain-plot-18.67dB.png',
-    solver: 'Ansys HFSS 2024 R1 (MoM Solver)',
+    solver: 'Ansys HFSS MoM Solver',
     application: 'Aerospace & Radar Sensing Subarray',
-    description: 'High-efficiency directional radiation pattern showing continuous broadside gain lobe with low back-radiation.',
-    color: 'from-sky-600 to-cyan-500'
+    description: 'Directivity plot of high-gain directional beam with optimized front-to-back ratio.'
   },
   {
     id: 'plot-3',
@@ -42,10 +39,9 @@ const GAIN_PLOTS: GainPlot[] = [
     maxGain: '11.18 dBi',
     minGain: '-27.57 dBi',
     imageSrc: '/assets/ansys-gain-plot-11.18dB.png',
-    solver: 'Ansys HFSS 2024 R1 (Full-Wave FEA)',
+    solver: 'Ansys HFSS Full-Wave Solver',
     application: 'UAV & Space-Constrained Payload Antenna',
-    description: 'Hemispherical broadside gain pattern synthesized for compact printed microstrip patch antenna architectures.',
-    color: 'from-indigo-600 to-blue-500'
+    description: 'Broadside 3D gain lobe plot synthesized for compact printed microstrip patch antenna architectures.'
   }
 ];
 
@@ -93,14 +89,14 @@ export const HeroGainVisualizer: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <h3 className="text-xs font-mono font-bold text-slate-900 uppercase tracking-wider">
-                Ansys HFSS 3D Electromagnetic Gain Visualizer
+                Ansys HFSS 3D Gain Plot Visualizer
               </h3>
               <span className="px-2 py-0.5 bg-blue-50 text-blue-700 text-[10px] font-mono font-bold rounded border border-blue-200">
                 HFSS 2024 R1
               </span>
             </div>
             <p className="text-[11px] text-slate-500 font-mono">
-              3D Far-Field Directivity & Power Distribution Lobe
+              3D Far-Field Directivity Radiation Lobe
             </p>
           </div>
         </div>
@@ -128,20 +124,20 @@ export const HeroGainVisualizer: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Image Display with Scanning Animation */}
+      {/* Main Image Display - ONLY THE 3D GAIN PLOT */}
       <div className="relative w-full h-[320px] sm:h-[350px] bg-slate-50 rounded-xl border border-slate-200 overflow-hidden flex items-center justify-center group">
-        {/* Animated Scanning Laser Line */}
+        {/* Animated Scanning Line */}
         <div
           className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent z-20 pointer-events-none opacity-75 shadow-[0_0_8px_#2563eb]"
           style={{ top: `${scanPosition}%` }}
         />
 
-        {/* Ansys Plot Image */}
+        {/* Cropped Ansys 3D Gain Lobe Plot Image */}
         <img
           key={activePlot.id}
           src={activePlot.imageSrc}
           alt={activePlot.title}
-          className="max-h-full max-w-full object-contain p-2 transition-all duration-700 transform scale-100 group-hover:scale-105"
+          className="max-h-[85%] max-w-[85%] object-contain transition-all duration-700 transform hover:scale-110 drop-shadow-md"
         />
 
         {/* Floating Peak Gain Badge */}
@@ -150,7 +146,7 @@ export const HeroGainVisualizer: React.FC = () => {
           <span className="text-sm font-bold text-blue-600">{activePlot.maxGain}</span>
         </div>
 
-        {/* Floating Solver Badge */}
+        {/* Floating Range Badge */}
         <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm font-mono text-xs z-10">
           <span className="text-[10px] text-slate-500 block">Dynamic Range</span>
           <span className="text-xs font-bold text-slate-800">{activePlot.minGain} to {activePlot.maxGain}</span>
@@ -206,8 +202,8 @@ export const HeroGainVisualizer: React.FC = () => {
 
       {/* Full-Screen Inspection Modal */}
       {inspectModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white border border-slate-200 rounded-2xl max-w-5xl w-full p-6 space-y-4 shadow-2xl relative">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-2xl max-w-3xl w-full p-6 space-y-4 shadow-2xl relative">
             <button
               onClick={() => setInspectModalOpen(false)}
               className="absolute top-4 right-4 p-2 text-slate-500 hover:text-slate-900 bg-slate-100 rounded-lg border border-slate-200"
@@ -220,7 +216,7 @@ export const HeroGainVisualizer: React.FC = () => {
               <h2 className="text-xl font-bold text-slate-900 font-sans">{activePlot.title}</h2>
             </div>
 
-            <div className="bg-slate-50 rounded-xl border border-slate-200 p-4 flex items-center justify-center h-[500px]">
+            <div className="bg-slate-50 rounded-xl border border-slate-200 p-6 flex items-center justify-center h-[420px]">
               <img
                 src={activePlot.imageSrc}
                 alt={activePlot.title}
