@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Activity, ChevronRight, ChevronLeft, Maximize2, X } from 'lucide-react';
 
 interface GainPlot {
@@ -40,17 +40,8 @@ const GAIN_PLOTS: GainPlot[] = [
 export const HeroGainVisualizer: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [inspectModalOpen, setInspectModalOpen] = useState<boolean>(false);
-  const [scanPosition, setScanPosition] = useState<number>(0);
 
   const activePlot = GAIN_PLOTS[currentIndex];
-
-  // Continuous laser scanner animation effect
-  useEffect(() => {
-    const scanInterval = setInterval(() => {
-      setScanPosition((prev) => (prev + 1) % 100);
-    }, 30);
-    return () => clearInterval(scanInterval);
-  }, []);
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % GAIN_PLOTS.length);
@@ -88,12 +79,6 @@ export const HeroGainVisualizer: React.FC = () => {
 
       {/* Main Image Display - ONLY THE 3D GAIN PLOT */}
       <div className="relative w-full h-[320px] sm:h-[350px] bg-slate-50 rounded-xl border border-slate-200 overflow-hidden flex items-center justify-center group">
-        {/* Animated Scanning Line */}
-        <div
-          className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent z-20 pointer-events-none opacity-75 shadow-[0_0_8px_#2563eb]"
-          style={{ top: `${scanPosition}%` }}
-        />
-
         {/* Cropped Ansys 3D Gain Lobe Plot Image */}
         <img
           key={activePlot.id}
