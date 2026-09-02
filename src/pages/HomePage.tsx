@@ -106,22 +106,18 @@ export const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
       {/* TRUST / CAPABILITY STRIP */}
       <section className="bg-white border-y border-slate-200 py-6 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center font-mono">
-            <div className="p-3 border-r border-slate-200 last:border-r-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center font-mono">
+            <div className="p-3 md:border-r border-slate-200">
               <span className="text-blue-600 font-bold block text-sm sm:text-base">Custom Design</span>
               <span className="text-slate-500 text-xs">Architectures built to spec</span>
             </div>
-            <div className="p-3 border-r border-slate-200 last:border-r-0">
+            <div className="p-3 md:border-r border-slate-200">
               <span className="text-blue-600 font-bold block text-sm sm:text-base">EM Simulation</span>
               <span className="text-slate-500 text-xs">HFSS & CST 3D Modeling</span>
             </div>
-            <div className="p-3 border-r border-slate-200 last:border-r-0">
+            <div className="p-3">
               <span className="text-blue-600 font-bold block text-sm sm:text-base">Performance Optimization</span>
               <span className="text-slate-500 text-xs">S11, Gain, VSWR & Bandwidth</span>
-            </div>
-            <div className="p-3">
-              <span className="text-blue-600 font-bold block text-sm sm:text-base">Engineering Reports</span>
-              <span className="text-slate-500 text-xs">Full CAD & S2P Touchstone</span>
             </div>
           </div>
         </div>

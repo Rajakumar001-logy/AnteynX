@@ -54,7 +54,7 @@ export const ContactPage: React.FC<{ setCurrentPage: (page: string) => void }> =
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-500 block uppercase">Engineering Email</span>
-                  <span className="text-sm font-bold text-slate-900">engineering@anteynx.com</span>
+                  <span className="text-sm font-bold text-slate-900">antenyx@gmail.com</span>
                 </div>
               </div>
 

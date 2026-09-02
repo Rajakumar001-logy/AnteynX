@@ -25,7 +25,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
                 <Radio className="w-5 h-5 text-blue-600" />
               </div>
               <span className="font-mono font-bold text-xl tracking-wider text-slate-900">
-                ANTEYN<span className="text-blue-600">X</span> <span className="text-xs font-normal text-slate-500 border-l border-slate-200 pl-2">RF</span>
+                ANTEYN<span className="text-blue-600">X</span>
               </span>
             </div>
 
@@ -120,7 +120,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
             <div className="mt-6 space-y-2 text-xs font-mono text-slate-600">
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-blue-600" />
-                <span>engineering@anteynx.com</span>
+                <span>antenyx@gmail.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <Linkedin className="w-3.5 h-3.5 text-blue-600" />

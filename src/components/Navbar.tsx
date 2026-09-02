@@ -60,7 +60,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) =
           <div>
             <div className="flex items-center gap-1.5">
               <span className="font-mono font-bold text-xl tracking-wider text-slate-900">ANTEYN<span className="text-blue-600">X</span></span>
-              <span className="px-1.5 py-0.5 bg-blue-50 text-[10px] font-mono text-blue-700 rounded border border-blue-200 font-semibold">RF</span>
             </div>
             <span className="text-[10px] text-slate-500 font-mono tracking-tight block">Custom Antenna Engineering</span>
           </div>
