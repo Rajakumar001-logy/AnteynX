@@ -59,18 +59,8 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('technologies')} className="hover:text-blue-600 transition">
-                  Antenna Technologies
-                </button>
-              </li>
-              <li>
                 <button onClick={() => handleNav('applications')} className="hover:text-blue-600 transition">
                   Applications
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('portfolio')} className="hover:text-blue-600 transition">
-                  Portfolio Projects
                 </button>
               </li>
               <li>

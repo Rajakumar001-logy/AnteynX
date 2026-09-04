@@ -25,9 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) =
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
-    { id: 'technologies', label: 'Antenna Tech' },
     { id: 'applications', label: 'Applications' },
-    { id: 'portfolio', label: 'Portfolio' },
     { id: 'about', label: 'About' },
     { id: 'contact', label: 'Contact' },
   ];

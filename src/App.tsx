@@ -3,9 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
 import { ServicesPage } from './pages/ServicesPage';
-import { TechnologiesPage } from './pages/TechnologiesPage';
 import { ApplicationsPage } from './pages/ApplicationsPage';
-import { PortfolioPage } from './pages/PortfolioPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { QuotePage } from './pages/QuotePage';
@@ -17,7 +15,7 @@ export function App() {
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.replace('#', '');
-      if (['home', 'services', 'technologies', 'applications', 'portfolio', 'about', 'contact', 'quote'].includes(hash)) {
+      if (['home', 'services', 'applications', 'about', 'contact', 'quote'].includes(hash)) {
         setCurrentPage(hash);
       }
     };
@@ -37,12 +35,8 @@ export function App() {
     switch (currentPage) {
       case 'services':
         return <ServicesPage setCurrentPage={handlePageChange} />;
-      case 'technologies':
-        return <TechnologiesPage setCurrentPage={handlePageChange} />;
       case 'applications':
         return <ApplicationsPage setCurrentPage={handlePageChange} />;
-      case 'portfolio':
-        return <PortfolioPage setCurrentPage={handlePageChange} />;
       case 'about':
         return <AboutPage setCurrentPage={handlePageChange} />;
       case 'contact':
