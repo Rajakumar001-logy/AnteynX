@@ -1,5 +1,6 @@
 import React from 'react';
 import { Radio, ArrowRight, Linkedin, Mail } from 'lucide-react';
+import { LINKEDIN_URL } from '../constants';
 
 interface FooterProps {
   setCurrentPage: (page: string) => void;
@@ -114,7 +115,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
               </div>
               <div className="flex items-center gap-2">
                 <Linkedin className="w-3.5 h-3.5 text-blue-600" />
-                <a href="#linkedin" className="hover:text-blue-600">LinkedIn Profile</a>
+                <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600">LinkedIn Profile</a>
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Linkedin, Send, CheckCircle2, ArrowRight } from 'lucide-react';
+import { LINKEDIN_URL } from '../constants';
 
 export const ContactPage: React.FC<{ setCurrentPage: (page: string) => void }> = ({ setCurrentPage }) => {
   const [formData, setFormData] = useState({
@@ -84,8 +85,8 @@ export const ContactPage: React.FC<{ setCurrentPage: (page: string) => void }> =
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-500 block uppercase">Professional Network</span>
-                  <a href="#linkedin" className="text-sm font-bold text-blue-600 hover:underline">
-                    linkedin.com/company/anteynx
+                  <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-blue-600 hover:underline">
+                    LinkedIn Profile
                   </a>
                 </div>
               </div>
