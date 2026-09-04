@@ -311,7 +311,7 @@ export const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
             </button>
 
             <button
-              onClick={() => setCurrentPage('contact')}
+              onClick={() => setCurrentPage('quote')}
               className="px-8 py-4 bg-white hover:bg-slate-100 text-blue-600 border border-slate-300 font-bold text-sm rounded-xl transition shadow-sm"
             >
               Discuss Your Requirement

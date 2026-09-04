@@ -27,7 +27,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) =
     { id: 'services', label: 'Services' },
     { id: 'applications', label: 'Applications' },
     { id: 'about', label: 'About' },
-    { id: 'contact', label: 'Contact' },
   ];
 
   const handleNavClick = (id: string) => {

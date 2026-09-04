@@ -69,11 +69,6 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
                   About Us
                 </button>
               </li>
-              <li>
-                <button onClick={() => handleNav('contact')} className="hover:text-blue-600 transition">
-                  Contact
-                </button>
-              </li>
             </ul>
           </div>
 

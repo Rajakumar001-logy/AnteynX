@@ -5,7 +5,6 @@ import { HomePage } from './pages/HomePage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ApplicationsPage } from './pages/ApplicationsPage';
 import { AboutPage } from './pages/AboutPage';
-import { ContactPage } from './pages/ContactPage';
 import { GOOGLE_FORM_URL } from './constants';
 
 export function App() {
@@ -19,7 +18,7 @@ export function App() {
         window.open(GOOGLE_FORM_URL, '_blank', 'noopener,noreferrer');
         return;
       }
-      if (['home', 'services', 'applications', 'about', 'contact'].includes(hash)) {
+      if (['home', 'services', 'applications', 'about'].includes(hash)) {
         setCurrentPage(hash);
       }
     };
@@ -47,8 +46,6 @@ export function App() {
         return <ApplicationsPage setCurrentPage={handlePageChange} />;
       case 'about':
         return <AboutPage setCurrentPage={handlePageChange} />;
-      case 'contact':
-        return <ContactPage setCurrentPage={handlePageChange} />;
       case 'home':
       default:
         return <HomePage setCurrentPage={handlePageChange} />;
