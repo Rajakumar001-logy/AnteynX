@@ -6,7 +6,7 @@ import { ServicesPage } from './pages/ServicesPage';
 import { ApplicationsPage } from './pages/ApplicationsPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
-import { QuotePage } from './pages/QuotePage';
+import { GOOGLE_FORM_URL } from './constants';
 
 export function App() {
   const [currentPage, setCurrentPage] = useState<string>('home');
@@ -15,7 +15,11 @@ export function App() {
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.replace('#', '');
-      if (['home', 'services', 'applications', 'about', 'contact', 'quote'].includes(hash)) {
+      if (hash === 'quote') {
+        window.open(GOOGLE_FORM_URL, '_blank', 'noopener,noreferrer');
+        return;
+      }
+      if (['home', 'services', 'applications', 'about', 'contact'].includes(hash)) {
         setCurrentPage(hash);
       }
     };
@@ -26,6 +30,10 @@ export function App() {
   }, []);
 
   const handlePageChange = (page: string) => {
+    if (page === 'quote') {
+      window.open(GOOGLE_FORM_URL, '_blank', 'noopener,noreferrer');
+      return;
+    }
     setCurrentPage(page);
     window.location.hash = page;
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -41,8 +49,6 @@ export function App() {
         return <AboutPage setCurrentPage={handlePageChange} />;
       case 'contact':
         return <ContactPage setCurrentPage={handlePageChange} />;
-      case 'quote':
-        return <QuotePage />;
       case 'home':
       default:
         return <HomePage setCurrentPage={handlePageChange} />;
@@ -50,7 +56,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-rf-dark text-slate-100 flex flex-col justify-between selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between">
       <Navbar currentPage={currentPage} setCurrentPage={handlePageChange} />
       <main className="flex-grow">{renderPage()}</main>
       <Footer setCurrentPage={handlePageChange} />
